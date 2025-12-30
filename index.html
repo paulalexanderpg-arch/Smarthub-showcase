@@ -1,0 +1,865 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SCADA Enterprise System - Overview</title>
+    <meta name="description" content="Modern overview of SCADA Enterprise System for clients." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0b1116;
+        --ink-2: #101923;
+        --paper: #f6f3ef;
+        --accent: #00a3a3;
+        --accent-2: #ff8f1f;
+        --accent-3: #e2b04a;
+        --muted: #6b7a86;
+        --line: rgba(11, 17, 22, 0.12);
+        --glass: rgba(255, 255, 255, 0.62);
+        --shadow: 0 28px 60px rgba(11, 17, 22, 0.18);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(circle at 10% 10%, rgba(0, 163, 163, 0.18), transparent 45%),
+          radial-gradient(circle at 85% 12%, rgba(255, 143, 31, 0.18), transparent 45%),
+          linear-gradient(120deg, #f4efe9 0%, #f6f3ef 55%, #f8f6f2 100%);
+        min-height: 100vh;
+        scroll-behavior: smooth;
+      }
+
+      .page {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .grain {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+        mix-blend-mode: multiply;
+      }
+
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(16px);
+        background: rgba(246, 243, 239, 0.85);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 18px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-size: 13px;
+      }
+
+      .brand .logo {
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        background: conic-gradient(from 120deg, var(--accent), var(--accent-2), var(--accent));
+        box-shadow: 0 10px 20px rgba(0, 163, 163, 0.25);
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        font-size: 13px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--ink);
+        opacity: 0.7;
+        transition: 0.2s ease;
+      }
+
+      .nav-links a:hover {
+        opacity: 1;
+      }
+
+      .lang-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--ink);
+        color: white;
+        border-radius: 999px;
+        padding: 6px 14px;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+        border: none;
+      }
+
+      .hero {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 90px 28px 70px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 48px;
+        align-items: center;
+      }
+
+      .hero h1 {
+        font-family: "Fraunces", serif;
+        font-size: clamp(2.5rem, 4vw, 4rem);
+        line-height: 1.05;
+        margin-bottom: 18px;
+      }
+
+      .hero p {
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.6;
+      }
+
+      .hero-cta {
+        margin-top: 28px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .btn {
+        padding: 14px 22px;
+        border-radius: 16px;
+        border: none;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .btn.primary {
+        background: var(--ink);
+        color: white;
+        box-shadow: 0 16px 30px rgba(11, 17, 22, 0.2);
+      }
+
+      .btn.secondary {
+        background: transparent;
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .hero-card {
+        background: var(--glass);
+        border-radius: 28px;
+        padding: 28px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        position: relative;
+      }
+
+      .hero-card::after {
+        content: "";
+        position: absolute;
+        inset: 14px;
+        border-radius: 22px;
+        border: 1px dashed rgba(11, 17, 22, 0.15);
+        pointer-events: none;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+        gap: 16px;
+        margin-top: 20px;
+      }
+
+      .metric {
+        padding: 16px;
+        border-radius: 16px;
+        background: white;
+        border: 1px solid var(--line);
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 1.2rem;
+      }
+
+      .metric span {
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 70px 28px;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 22px;
+      }
+
+      .section-title h2 {
+        font-family: "Fraunces", serif;
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+      }
+
+      .chip {
+        background: rgba(0, 163, 163, 0.12);
+        color: #006b6b;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 24px;
+        padding: 22px;
+        border: 1px solid var(--line);
+        box-shadow: 0 14px 30px rgba(11, 17, 22, 0.08);
+      }
+
+      .card h3 {
+        font-size: 1.05rem;
+        margin-bottom: 10px;
+      }
+
+      .card p {
+        color: var(--muted);
+        line-height: 1.5;
+        font-size: 0.95rem;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        align-items: center;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 14px;
+      }
+
+      .step {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        background: rgba(11, 17, 22, 0.04);
+        border-radius: 16px;
+        padding: 14px 16px;
+      }
+
+      .step span {
+        font-weight: 700;
+        color: var(--accent);
+      }
+
+      .cta {
+        background: linear-gradient(120deg, rgba(0, 163, 163, 0.2), rgba(255, 143, 31, 0.18));
+        border-radius: 32px;
+        padding: 36px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        display: grid;
+        gap: 18px;
+      }
+
+      footer {
+        padding: 40px 28px 60px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: all 0.7s ease;
+      }
+
+      .reveal.reveal-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 720px) {
+        .nav-inner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .nav-links {
+          gap: 10px;
+        }
+
+        .hero-card {
+          order: -1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="grain"></div>
+      <div id="root"></div>
+    </div>
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      const content = {
+        es: {
+          nav: [
+            { id: "vision", label: "Vision" },
+            { id: "platform", label: "Plataforma" },
+            { id: "modules", label: "Modulos" },
+            { id: "architecture", label: "Arquitectura" },
+            { id: "security", label: "Seguridad" },
+            { id: "roadmap", label: "Roadmap" },
+            { id: "demo", label: "Demo" },
+          ],
+          hero: {
+            title: "SCADA Enterprise System",
+            subtitle:
+              "Una plataforma industrial moderna para monitoreo en tiempo real, analitica operacional y decisiones mas rapidas. Diseñada para equipos de planta, operaciones y direccion.",
+            ctaPrimary: "Solicitar acceso",
+            ctaSecondary: "Ver roadmap",
+            highlights: [
+              { value: "OPC UA", label: "Integracion industrial" },
+              { value: "WS", label: "Datos en tiempo real" },
+              { value: "AI/ML", label: "Capas inteligentes" },
+              { value: "i18n", label: "ES / EN listo" },
+            ],
+          },
+          vision: {
+            title: "Vision",
+            tag: "Propuesta",
+            copy:
+              "Conectar datos de planta con decisiones ejecutivas en minutos. El sistema unifica adquisicion OPC, historico, alarmas y reportes en una experiencia clara, rapida y escalable.",
+            bullets: [
+              "Visibilidad total de procesos y KPIs en un solo tablero.",
+              "Alertas con contexto, no solo señales.",
+              "Reportes listos para auditoria y equipos de produccion.",
+            ],
+          },
+          platform: {
+            title: "Plataforma moderna",
+            tag: "Diseño",
+            cards: [
+              {
+                title: "Tiempo real sin friccion",
+                copy:
+                  "Streaming WebSocket para variables OPC, alarmas y KPIs sin sobrecargar la red.",
+              },
+              {
+                title: "Historico confiable",
+                copy:
+                  "Historian en InfluxDB con consultas rapidas para analisis por turnos y tendencias.",
+              },
+              {
+                title: "Escalabilidad limpia",
+                copy:
+                  "Backend modular con FastAPI, frontend React y cache Redis para crecer sin reescrituras.",
+              },
+            ],
+          },
+          modules: {
+            title: "Modulos clave",
+            tag: "Producto",
+            cards: [
+              {
+                title: "Monitoreo y HMI",
+                copy:
+                  "Pantallas 2D/3D con tags industriales, estados y alarmas en vivo.",
+              },
+              {
+                title: "Alarmas inteligentes",
+                copy:
+                  "Deadbands, dedupe, jerarquias y flujos de reconocimiento claros.",
+              },
+              {
+                title: "Reportes operativos",
+                copy:
+                  "Reportes por turno y analisis de produccion con exportacion PDF/Excel.",
+              },
+              {
+                title: "Mantenimiento",
+                copy:
+                  "Dashboard de equipos, tareas programadas y costos de mantenimiento.",
+              },
+              {
+                title: "AI/ML opcional",
+                copy:
+                  "Predicciones de variables y recomendaciones basadas en tendencias.",
+              },
+              {
+                title: "Seguridad y acceso",
+                copy:
+                  "Roles y permisos claros para operadores, tecnicos y administracion.",
+              },
+            ],
+          },
+          architecture: {
+            title: "Arquitectura",
+            tag: "Tecnologia",
+            steps: [
+              {
+                title: "Adquisicion OPC UA",
+                copy: "Variables desde PLC y sensores hacia buffer de alta velocidad.",
+              },
+              {
+                title: "Historian y cache",
+                copy: "InfluxDB + Redis para performance y trazabilidad.",
+              },
+              {
+                title: "API + WebSocket",
+                copy: "Servicios REST y streaming para UI y apps externas.",
+              },
+              {
+                title: "Frontend",
+                copy: "React + Vite + Tailwind con UI industrial clara.",
+              },
+            ],
+          },
+          security: {
+            title: "Seguridad y compliance",
+            tag: "Confianza",
+            copy:
+              "El sistema contempla buenas practicas de autenticacion, auditoria y control de cambios, con soporte para entornos regulados.",
+            cards: [
+              {
+                title: "Acceso por roles",
+                copy:
+                  "Operador, tecnico y admin con permisos alineados al riesgo.",
+              },
+              {
+                title: "Audit trail",
+                copy:
+                  "Registro de eventos y cambios para trazabilidad operativa.",
+              },
+              {
+                title: "Resiliencia",
+                copy:
+                  "Servicios monitoreados y alertas ante degradacion.",
+              },
+            ],
+          },
+          roadmap: {
+            title: "Roadmap",
+            tag: "Futuro",
+            copy:
+              "Iteraciones enfocadas en integraciones OT/IT, movilidad y analitica avanzada.",
+            items: [
+              "Conectores adicionales: MQTT, Modbus y edge.",
+              "Firma electronica y flujos de aprobacion.",
+              "Dashboards ejecutivos por unidad de negocio.",
+            ],
+          },
+          demo: {
+            title: "Demo interactivo",
+            tag: "Acceso",
+            copy:
+              "El demo muestra navegacion completa por pantallas con datos simulados.",
+            primary: "Solicitar demo",
+            secondary: "Enviar preguntas",
+          },
+          footer: "SCADA Enterprise System - Presentacion comercial.",
+        },
+        en: {
+          nav: [
+            { id: "vision", label: "Vision" },
+            { id: "platform", label: "Platform" },
+            { id: "modules", label: "Modules" },
+            { id: "architecture", label: "Architecture" },
+            { id: "security", label: "Security" },
+            { id: "roadmap", label: "Roadmap" },
+            { id: "demo", label: "Demo" },
+          ],
+          hero: {
+            title: "SCADA Enterprise System",
+            subtitle:
+              "A modern industrial platform for real-time monitoring, operational analytics, and faster decisions. Built for plant teams, operations, and leadership.",
+            ctaPrimary: "Request access",
+            ctaSecondary: "View roadmap",
+            highlights: [
+              { value: "OPC UA", label: "Industrial integration" },
+              { value: "WS", label: "Real-time streams" },
+              { value: "AI/ML", label: "Intelligent layers" },
+              { value: "i18n", label: "ES / EN ready" },
+            ],
+          },
+          vision: {
+            title: "Vision",
+            tag: "Value",
+            copy:
+              "Connect plant data with executive decisions in minutes. The system unifies OPC acquisition, historian, alarms, and reports into a clear, fast, and scalable experience.",
+            bullets: [
+              "Full visibility of processes and KPIs in one dashboard.",
+              "Contextual alerts, not just signals.",
+              "Audit-ready reports for production teams.",
+            ],
+          },
+          platform: {
+            title: "Modern platform",
+            tag: "Design",
+            cards: [
+              {
+                title: "Frictionless real-time",
+                copy:
+                  "WebSocket streaming for OPC variables, alarms, and KPIs without network overload.",
+              },
+              {
+                title: "Reliable historian",
+                copy:
+                  "InfluxDB-backed historian with fast queries for shift analysis and trends.",
+              },
+              {
+                title: "Clean scalability",
+                copy:
+                  "Modular FastAPI backend, React frontend, and Redis cache for growth.",
+              },
+            ],
+          },
+          modules: {
+            title: "Core modules",
+            tag: "Product",
+            cards: [
+              {
+                title: "Monitoring and HMI",
+                copy:
+                  "2D/3D screens with industrial tags, live status and alarms.",
+              },
+              {
+                title: "Smart alarms",
+                copy:
+                  "Deadbands, dedupe, hierarchy, and clear acknowledgement flows.",
+              },
+              {
+                title: "Operational reports",
+                copy:
+                  "Shift reports and production analytics with PDF/Excel export.",
+              },
+              {
+                title: "Maintenance",
+                copy:
+                  "Equipment dashboards, scheduled tasks, and maintenance costs.",
+              },
+              {
+                title: "Optional AI/ML",
+                copy:
+                  "Variable predictions and recommendations based on trends.",
+              },
+              {
+                title: "Security and access",
+                copy:
+                  "Role-based access for operators, technicians, and admins.",
+              },
+            ],
+          },
+          architecture: {
+            title: "Architecture",
+            tag: "Technology",
+            steps: [
+              {
+                title: "OPC UA acquisition",
+                copy: "Variables from PLCs and sensors to a high-speed buffer.",
+              },
+              {
+                title: "Historian and cache",
+                copy: "InfluxDB + Redis for performance and traceability.",
+              },
+              {
+                title: "API + WebSocket",
+                copy: "REST services and streaming for UI and external apps.",
+              },
+              {
+                title: "Frontend",
+                copy: "React + Vite + Tailwind with clear industrial UX.",
+              },
+            ],
+          },
+          security: {
+            title: "Security and compliance",
+            tag: "Trust",
+            copy:
+              "The system follows good practices for authentication, auditing, and change control, aligned with regulated environments.",
+            cards: [
+              {
+                title: "Role-based access",
+                copy:
+                  "Operator, technician, and admin permissions aligned to risk.",
+              },
+              {
+                title: "Audit trail",
+                copy:
+                  "Event and change logging for operational traceability.",
+              },
+              {
+                title: "Resilience",
+                copy:
+                  "Monitored services and alerts for degradation.",
+              },
+            ],
+          },
+          roadmap: {
+            title: "Roadmap",
+            tag: "Future",
+            copy:
+              "Iterations focused on OT/IT integrations, mobility, and advanced analytics.",
+            items: [
+              "Additional connectors: MQTT, Modbus, and edge.",
+              "Electronic signature and approval flows.",
+              "Executive dashboards by business unit.",
+            ],
+          },
+          demo: {
+            title: "Interactive demo",
+            tag: "Access",
+            copy:
+              "The demo shows full navigation with simulated data across screens.",
+            primary: "Request demo",
+            secondary: "Send questions",
+          },
+          footer: "SCADA Enterprise System - Commercial overview.",
+        },
+      };
+
+      const SectionTitle = ({ tag, title }) => (
+        <div className="section-title reveal">
+          <span className="chip">{tag}</span>
+          <h2>{title}</h2>
+        </div>
+      );
+
+      const App = () => {
+        const [lang, setLang] = React.useState("es");
+        const t = content[lang];
+
+        React.useEffect(() => {
+          const nodes = document.querySelectorAll(".reveal");
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("reveal-in");
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.2 }
+          );
+
+          nodes.forEach((node) => observer.observe(node));
+          return () => observer.disconnect();
+        }, [lang]);
+
+        return (
+          <>
+            <header className="nav">
+              <div className="nav-inner">
+                <div className="brand">
+                  <div className="logo"></div>
+                  SCADA Enterprise System
+                </div>
+                <nav className="nav-links">
+                  {t.nav.map((item) => (
+                    <a key={item.id} href={`#${item.id}`}>
+                      {item.label}
+                    </a>
+                  ))}
+                </nav>
+                <button
+                  className="lang-toggle"
+                  onClick={() => setLang((prev) => (prev === "es" ? "en" : "es"))}
+                >
+                  {lang === "es" ? "EN" : "ES"}
+                </button>
+              </div>
+            </header>
+
+            <main>
+              <section className="hero">
+                <div className="reveal">
+                  <h1>{t.hero.title}</h1>
+                  <p>{t.hero.subtitle}</p>
+                  <div className="hero-cta">
+                    <a className="btn primary" href="#demo">
+                      {t.hero.ctaPrimary}
+                    </a>
+                    <a className="btn secondary" href="#roadmap">
+                      {t.hero.ctaSecondary}
+                    </a>
+                  </div>
+                </div>
+                <div className="hero-card reveal">
+                  <strong>{lang === "es" ? "Resumen operativo" : "Operational snapshot"}</strong>
+                  <div className="hero-grid">
+                    {t.hero.highlights.map((item) => (
+                      <div key={item.value} className="metric">
+                        <strong>{item.value}</strong>
+                        <span>{item.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <section id="vision">
+                <SectionTitle tag={t.vision.tag} title={t.vision.title} />
+                <div className="split">
+                  <p className="reveal">{t.vision.copy}</p>
+                  <div className="timeline">
+                    {t.vision.bullets.map((item, index) => (
+                      <div className="step reveal" key={item}>
+                        <span>{String(index + 1).padStart(2, "0")}</span>
+                        <div>{item}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <section id="platform">
+                <SectionTitle tag={t.platform.tag} title={t.platform.title} />
+                <div className="grid-3">
+                  {t.platform.cards.map((card) => (
+                    <div className="card reveal" key={card.title}>
+                      <h3>{card.title}</h3>
+                      <p>{card.copy}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section id="modules">
+                <SectionTitle tag={t.modules.tag} title={t.modules.title} />
+                <div className="grid-3">
+                  {t.modules.cards.map((card) => (
+                    <div className="card reveal" key={card.title}>
+                      <h3>{card.title}</h3>
+                      <p>{card.copy}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section id="architecture">
+                <SectionTitle tag={t.architecture.tag} title={t.architecture.title} />
+                <div className="timeline">
+                  {t.architecture.steps.map((step, index) => (
+                    <div className="step reveal" key={step.title}>
+                      <span>{String(index + 1).padStart(2, "0")}</span>
+                      <div>
+                        <strong>{step.title}</strong>
+                        <div>{step.copy}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section id="security">
+                <SectionTitle tag={t.security.tag} title={t.security.title} />
+                <div className="split">
+                  <p className="reveal">{t.security.copy}</p>
+                  <div className="grid-3">
+                    {t.security.cards.map((card) => (
+                      <div className="card reveal" key={card.title}>
+                        <h3>{card.title}</h3>
+                        <p>{card.copy}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <section id="roadmap">
+                <SectionTitle tag={t.roadmap.tag} title={t.roadmap.title} />
+                <div className="split">
+                  <p className="reveal">{t.roadmap.copy}</p>
+                  <div className="timeline">
+                    {t.roadmap.items.map((item, index) => (
+                      <div className="step reveal" key={item}>
+                        <span>{String(index + 1).padStart(2, "0")}</span>
+                        <div>{item}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <section id="demo">
+                <SectionTitle tag={t.demo.tag} title={t.demo.title} />
+                <div className="cta reveal">
+                  <p>{t.demo.copy}</p>
+                  <div className="hero-cta">
+                    <a className="btn primary" href="mailto:demo@company.com">
+                      {t.demo.primary}
+                    </a>
+                    <a className="btn secondary" href="mailto:info@company.com">
+                      {t.demo.secondary}
+                    </a>
+                  </div>
+                </div>
+              </section>
+            </main>
+
+            <footer>{t.footer}</footer>
+          </>
+        );
+      };
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
