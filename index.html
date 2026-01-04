@@ -364,31 +364,33 @@
             { id: "modules", label: "Módulos" },
             { id: "architecture", label: "Arquitectura" },
             { id: "security", label: "Seguridad" },
+            { id: "pages", label: "Pantallas" },
             { id: "roadmap", label: "Roadmap" },
             { id: "demo", label: "Demo" },
           ],
           hero: {
             title: "Smart Industrial Hub",
             subtitle:
-              "Plataforma industrial de nueva generación que integra monitoreo en tiempo real, historian, alarmas avanzadas, notificaciones multicanal, reportes de producción y AI/ML. Diseñada para alta escalabilidad, confiabilidad e integración ERP/MES.",
-            ctaPrimary: "Solicitar demo",
-            ctaSecondary: "Ver arquitectura",
+              "Plataforma industrial de nueva generación que unifica adquisición OPC UA en tiempo real, historian de alto rendimiento, motor de alarmas inteligente, notificaciones multicanal, reportes de producción por turno y agente AI/ML conversacional. Diseñada para entornos industriales exigentes con arquitectura escalable y seguridad enterprise.",
+            ctaPrimary: "Ver demo en video",
+            ctaSecondary: "Explorar arquitectura",
             highlights: [
               { value: "25,000+", label: "Variables @ 1Hz" },
               { value: "3 WS", label: "Streams real-time" },
               { value: "9/10", label: "Score Enterprise" },
-              { value: "243+", label: "Tests automatizados" },
+              { value: "13", label: "Pantallas UI" },
             ],
           },
           vision: {
-            title: "Visión",
+            title: "Visión del producto",
             tag: "Propuesta de valor",
             copy:
-              "Conectar datos de planta con decisiones ejecutivas en segundos. El sistema unifica adquisición OPC UA, historian InfluxDB, motor de alarmas inteligente y reportes de producción en una experiencia clara, rápida y escalable.",
+              "Transformar datos industriales en decisiones ejecutivas en segundos. Smart Industrial Hub conecta el piso de planta con la sala de juntas mediante una experiencia unificada que combina monitoreo en tiempo real, análisis histórico, gestión de alarmas inteligente y reportes listos para auditoría.",
             bullets: [
-              "Buffer circular de alto rendimiento con 25,000+ variables simultáneas.",
-              "Motor de alarmas multi-nivel (HIGH_HIGH, HIGH, LOW, LOW_LOW) con dedupe Redis.",
-              "Reportes por turno listos para auditoría con export PDF/Excel/JSON.",
+              "Buffer circular de alto rendimiento procesando 25,000+ variables simultáneas con latencia < 100ms.",
+              "Motor de alarmas multi-nivel (HIGH_HIGH, HIGH, LOW, LOW_LOW, RTN) con deadband, dedupe Redis e i18n.",
+              "Reportes de producción por turno con build/close/export automático a PDF, Excel, JSON y drop folder ERP.",
+              "Agente AI conversacional con RAG dual (LangChain + LlamaIndex) y 8 herramientas InfluxDB especializadas.",
             ],
           },
           platform: {
@@ -396,123 +398,161 @@
             tag: "Stack tecnológico",
             cards: [
               {
-                title: "3 WebSockets en tiempo real",
+                title: "3 WebSockets dedicados",
                 copy:
-                  "Streams dedicados para OPC, alarmas y KPIs con broadcast optimizado y reconexión automática.",
+                  "Streams independientes para datos OPC, alarmas activas y KPIs operativos. Broadcast optimizado con reconexión automática y heartbeat.",
               },
               {
-                title: "Historian InfluxDB",
+                title: "Historian InfluxDB 2.x",
                 copy:
-                  "Series temporales con batch writes, consultas por rango, agregaciones y políticas de retención.",
+                  "Series temporales con batch writes de alta velocidad, consultas por rango, agregaciones avanzadas y políticas de retención configurables.",
               },
               {
                 title: "Backend FastAPI + Redis",
                 copy:
-                  "API REST modular, SQLAlchemy ORM, dedupe en Redis y Store & Forward para resiliencia.",
+                  "API REST modular con SQLAlchemy ORM, PostgreSQL para metadata, Redis para dedupe/cache y Store & Forward para resiliencia.",
+              },
+              {
+                title: "Frontend React 18",
+                copy:
+                  "Vite como bundler, TailwindCSS para estilos, Three.js para visualización 3D, Recharts para gráficos e i18n completo ES/EN.",
               },
             ],
           },
           modules: {
-            title: "Módulos implementados",
-            tag: "Producto",
+            title: "Módulos del sistema",
+            tag: "Core del producto",
             cards: [
               {
                 title: "Lector OPC UA",
                 copy:
-                  "Suscripciones async, decodificación ExtensionObject, reconexión con backoff exponencial.",
+                  "Suscripciones async con asyncua, decodificación de ExtensionObjects, reconexión con backoff exponencial y soporte multi-vendor (Siemens, Rockwell, Beckhoff).",
               },
               {
-                title: "Motor de alarmas",
+                title: "Motor de alarmas avanzado",
                 copy:
-                  "Deadband, dedupe, jerarquías, RTN (Return to Normal), i18n y notificaciones configurables.",
+                  "5 niveles de severidad, deadband configurable, deduplicación con Redis, Return to Normal automático, jerarquías y notificaciones por regla.",
               },
               {
                 title: "Sistema de Templates MTP",
                 copy:
-                  "Definición de templates, campos derivados/calculados e instancias masivas automáticas.",
+                  "Definición de templates con campos base, derivados y calculados. Instanciación masiva automática para sensores homogéneos.",
               },
               {
                 title: "Reportes de producción",
                 copy:
-                  "Reportes por turno con build/close/export, PDF, Excel, JSON y drop folder ERP.",
+                  "Gestión de turnos con build, close y export. Formatos PDF, Excel y JSON. Drop folder para integración con sistemas ERP/MES.",
               },
               {
-                title: "Agente AI/ML",
+                title: "Agente AI/ML conversacional",
                 copy:
-                  "LangChain + LlamaIndex RAG dual, Smart Router, 8 herramientas InfluxDB para consultas.",
+                  "Ollama como runtime LLM, Smart Router para enrutamiento inteligente, RAG dual con LangChain y LlamaIndex, 8 herramientas InfluxDB.",
               },
               {
                 title: "Notificaciones multicanal",
                 copy:
-                  "Email SMTP + Telegram Bot con reglas por alarma, cooldown y prioridades de contacto.",
+                  "Email vía SMTP y Telegram Bot. Reglas configurables por alarma, cooldown entre envíos, prioridades de contacto y escalamiento.",
+              },
+              {
+                title: "Store & Forward",
+                copy:
+                  "Buffer de escritura con reintentos automáticos para InfluxDB. Protege la adquisición ante caídas transitorias del historian.",
+              },
+              {
+                title: "Watchdog Supervisor",
+                copy:
+                  "Monitoreo de servicios críticos con alertas de degradación, health checks multinivel y métricas de observabilidad.",
               },
             ],
           },
           architecture: {
             title: "Arquitectura enterprise",
-            tag: "Tecnología",
+            tag: "Flujo de datos",
             steps: [
               {
-                title: "Adquisición OPC UA",
-                copy: "PLCs Siemens, Rockwell, Beckhoff → Suscripciones async → Buffer circular de alta velocidad.",
+                title: "Capa Industrial (OPC UA)",
+                copy: "PLCs Siemens S7-1500/1200, Rockwell, Beckhoff y sensores OPC UA → Suscripciones async → Buffer circular de alta velocidad.",
               },
               {
-                title: "Historian + Cache",
-                copy: "InfluxDB 2.x (series temporales) + PostgreSQL (metadata) + Redis 7.x (dedupe/cache).",
+                title: "Capa de datos",
+                copy: "InfluxDB 2.x para series temporales + PostgreSQL 15+ para metadata/config + Redis 7.x para dedupe, cache y rate limiting.",
               },
               {
-                title: "API REST + WebSocket",
-                copy: "FastAPI + Uvicorn, 3 streams WebSocket, JWT auth, rate limiting y health checks.",
+                title: "Capa de servicios",
+                copy: "FastAPI + Uvicorn con 3 streams WebSocket, API REST completa, JWT + MFA/TOTP, rate limiting y health checks multinivel.",
               },
               {
-                title: "Frontend React",
-                copy: "React 18 + Vite + TailwindCSS + Three.js 3D + Recharts, i18n ES/EN completo.",
+                title: "Capa de presentación",
+                copy: "React 18 + Vite + TailwindCSS, visualización 3D con Three.js, gráficos con Recharts/ApexCharts, i18n ES/EN completo.",
+              },
+              {
+                title: "Integraciones externas",
+                copy: "Webhooks para eventos, drop folder CSV/JSON para ERP/MES, API REST para sistemas externos, Telegram y Email para notificaciones.",
               },
             ],
           },
           security: {
             title: "Seguridad enterprise",
-            tag: "Compliance",
+            tag: "Compliance ready",
             copy:
-              "El sistema implementa seguridad de grado enterprise con autenticación multifactor, auditoría completa y control de acceso granular para entornos regulados.",
+              "Implementación de seguridad de grado industrial con autenticación multifactor, auditoría completa de acciones, control de acceso granular y protecciones contra abuso. Preparado para entornos regulados y auditorías.",
             cards: [
               {
-                title: "JWT + MFA/TOTP",
+                title: "Autenticación JWT + MFA",
                 copy:
-                  "Autenticación con tokens JWT, bcrypt para passwords y MFA con códigos TOTP.",
+                  "Tokens JWT con refresh, bcrypt para hash de passwords, MFA opcional con códigos TOTP y sesiones seguras.",
               },
               {
                 title: "Auditoría completa",
                 copy:
-                  "Registro de eventos, cambios de configuración y acciones de usuario con timestamps.",
+                  "Registro inmutable de eventos, cambios de configuración, acciones de usuario, accesos y modificaciones con timestamps.",
               },
               {
                 title: "Rate limiting + Watchdog",
                 copy:
-                  "Protección contra abuso de API, supervisor de servicios críticos y alertas de degradación.",
+                  "Protección contra abuso de API por IP/usuario, supervisor de servicios críticos, alertas de degradación y recuperación automática.",
               },
             ],
           },
+          pages: {
+            title: "Pantallas del sistema",
+            tag: "Frontend",
+            cards: [
+              { title: "Dashboard principal", copy: "Vista ejecutiva con KPIs, widgets configurables y resumen operativo en tiempo real." },
+              { title: "Monitoring", copy: "Visualización de sensores, variables OPC y tendencias en tiempo real con actualización WebSocket." },
+              { title: "Alarmas", copy: "Gestión de alarmas activas, histórico, configuración de thresholds y reconocimiento." },
+              { title: "Producción", copy: "Reportes por turno, métricas de producción, export PDF/Excel y gestión de lotes." },
+              { title: "Histórico", copy: "Consultas a historian InfluxDB con rangos de tiempo, agregaciones y visualización de tendencias." },
+              { title: "Agente AI", copy: "Chat conversacional con el sistema, consultas en lenguaje natural y análisis inteligente de datos." },
+              { title: "Usuarios", copy: "Gestión de usuarios, roles, permisos y configuración de acceso al sistema." },
+              { title: "Mantenimiento", copy: "Dashboard de equipos, tareas programadas, historial de intervenciones y costos." },
+              { title: "ML Dashboard", copy: "Visualización de modelos predictivos, anomalías detectadas y recomendaciones del sistema." },
+              { title: "System Metrics", copy: "Monitoreo de salud del sistema, métricas de rendimiento y estado de servicios." },
+            ],
+          },
           roadmap: {
-            title: "Roadmap",
-            tag: "Evolución",
+            title: "Roadmap de evolución",
+            tag: "Próximos pasos",
             copy:
-              "Iteraciones enfocadas en expandir integraciones OT/IT, multi-planta y analítica avanzada.",
+              "El core técnico está en nivel enterprise para adquisición, alarmas e historian. Las próximas iteraciones se enfocan en expandir conectividad industrial y capacidades analíticas.",
             items: [
-              "Conectores MQTT, Modbus TCP y edge computing para IoT industrial.",
-              "Integración ERP/MES con webhooks, scheduler y firma electrónica.",
-              "Multi-plant governance, HA/cluster y computer vision opcional.",
+              "Conectores MQTT, Modbus TCP/RTU y edge computing para ampliación IoT industrial.",
+              "Integración profunda ERP/MES con webhooks bidireccionales, scheduler y firma electrónica.",
+              "Gobierno multi-planta con dashboards ejecutivos por unidad de negocio y comparativas.",
+              "Alta disponibilidad (HA) con clustering y failover automático para entornos críticos.",
+              "Computer vision opcional para inspección visual y detección de anomalías en línea.",
             ],
           },
           demo: {
-            title: "Demo interactivo",
-            tag: "Acceso",
+            title: "Demo en video",
+            tag: "Ver en acción",
             copy:
-              "El demo muestra navegación completa por todas las pantallas con datos simulados de planta industrial real.",
-            primary: "Solicitar demo",
-            secondary: "Descargar documentación",
+              "Explora Smart Industrial Hub en acción. El video muestra navegación completa por todas las pantallas con datos simulados de un reactor químico, incluyendo monitoreo en tiempo real, gestión de alarmas, reportes y el agente AI.",
+            videoUrl: "https://www.youtube.com/watch?v=zU8yvxnpOGI",
+            primary: "Solicitar acceso al demo",
+            secondary: "Contactar para documentación",
           },
-          footer: "Smart Industrial Hub v2.3 © 2025",
+          footer: "Smart Industrial Hub v2.3 · Plataforma Industrial Inteligente · © 2025",
         },
         en: {
           nav: [
@@ -521,31 +561,33 @@
             { id: "modules", label: "Modules" },
             { id: "architecture", label: "Architecture" },
             { id: "security", label: "Security" },
+            { id: "pages", label: "Screens" },
             { id: "roadmap", label: "Roadmap" },
             { id: "demo", label: "Demo" },
           ],
           hero: {
             title: "Smart Industrial Hub",
             subtitle:
-              "Next-generation industrial platform integrating real-time monitoring, historian, advanced alarms, multi-channel notifications, production reporting, and AI/ML. Designed for high scalability, reliability, and ERP/MES integration.",
-            ctaPrimary: "Request demo",
-            ctaSecondary: "View architecture",
+              "Next-generation industrial platform unifying real-time OPC UA acquisition, high-performance historian, intelligent alarm engine, multi-channel notifications, shift production reports, and conversational AI/ML agent. Designed for demanding industrial environments with scalable architecture and enterprise security.",
+            ctaPrimary: "Watch video demo",
+            ctaSecondary: "Explore architecture",
             highlights: [
               { value: "25,000+", label: "Variables @ 1Hz" },
               { value: "3 WS", label: "Real-time streams" },
               { value: "9/10", label: "Enterprise score" },
-              { value: "243+", label: "Automated tests" },
+              { value: "13", label: "UI Screens" },
             ],
           },
           vision: {
-            title: "Vision",
+            title: "Product vision",
             tag: "Value proposition",
             copy:
-              "Connect plant data with executive decisions in seconds. The system unifies OPC UA acquisition, InfluxDB historian, intelligent alarm engine, and production reports into a clear, fast, and scalable experience.",
+              "Transform industrial data into executive decisions in seconds. Smart Industrial Hub connects the plant floor to the boardroom through a unified experience combining real-time monitoring, historical analysis, intelligent alarm management, and audit-ready reports.",
             bullets: [
-              "High-performance circular buffer handling 25,000+ simultaneous variables.",
-              "Multi-level alarm engine (HIGH_HIGH, HIGH, LOW, LOW_LOW) with Redis dedupe.",
-              "Audit-ready shift reports with PDF/Excel/JSON export.",
+              "High-performance circular buffer processing 25,000+ simultaneous variables with < 100ms latency.",
+              "Multi-level alarm engine (HIGH_HIGH, HIGH, LOW, LOW_LOW, RTN) with deadband, Redis dedupe, and i18n.",
+              "Shift production reports with automatic build/close/export to PDF, Excel, JSON, and ERP drop folder.",
+              "Conversational AI agent with dual RAG (LangChain + LlamaIndex) and 8 specialized InfluxDB tools.",
             ],
           },
           platform: {
@@ -553,123 +595,161 @@
             tag: "Tech stack",
             cards: [
               {
-                title: "3 real-time WebSockets",
+                title: "3 dedicated WebSockets",
                 copy:
-                  "Dedicated streams for OPC, alarms, and KPIs with optimized broadcast and auto-reconnection.",
+                  "Independent streams for OPC data, active alarms, and operational KPIs. Optimized broadcast with auto-reconnection and heartbeat.",
               },
               {
-                title: "InfluxDB Historian",
+                title: "InfluxDB 2.x Historian",
                 copy:
-                  "Time-series with batch writes, range queries, aggregations, and retention policies.",
+                  "Time-series with high-speed batch writes, range queries, advanced aggregations, and configurable retention policies.",
               },
               {
                 title: "FastAPI + Redis backend",
                 copy:
-                  "Modular REST API, SQLAlchemy ORM, Redis dedupe, and Store & Forward for resilience.",
+                  "Modular REST API with SQLAlchemy ORM, PostgreSQL for metadata, Redis for dedupe/cache, and Store & Forward for resilience.",
+              },
+              {
+                title: "React 18 Frontend",
+                copy:
+                  "Vite as bundler, TailwindCSS for styling, Three.js for 3D visualization, Recharts for charts, and full ES/EN i18n.",
               },
             ],
           },
           modules: {
-            title: "Implemented modules",
-            tag: "Product",
+            title: "System modules",
+            tag: "Product core",
             cards: [
               {
                 title: "OPC UA Reader",
                 copy:
-                  "Async subscriptions, ExtensionObject decoding, exponential backoff reconnection.",
+                  "Async subscriptions with asyncua, ExtensionObject decoding, exponential backoff reconnection, and multi-vendor support (Siemens, Rockwell, Beckhoff).",
               },
               {
-                title: "Alarm engine",
+                title: "Advanced alarm engine",
                 copy:
-                  "Deadband, dedupe, hierarchies, RTN (Return to Normal), i18n, and configurable notifications.",
+                  "5 severity levels, configurable deadband, Redis deduplication, automatic Return to Normal, hierarchies, and rule-based notifications.",
               },
               {
                 title: "MTP Template system",
                 copy:
-                  "Template definitions, derived/calculated fields, and automatic mass instances.",
+                  "Template definitions with base, derived, and calculated fields. Automatic mass instantiation for homogeneous sensors.",
               },
               {
                 title: "Production reports",
                 copy:
-                  "Shift reports with build/close/export, PDF, Excel, JSON, and ERP drop folder.",
+                  "Shift management with build, close, and export. PDF, Excel, and JSON formats. Drop folder for ERP/MES integration.",
               },
               {
-                title: "AI/ML Agent",
+                title: "Conversational AI/ML agent",
                 copy:
-                  "LangChain + LlamaIndex dual RAG, Smart Router, 8 InfluxDB tools for queries.",
+                  "Ollama as LLM runtime, Smart Router for intelligent routing, dual RAG with LangChain and LlamaIndex, 8 InfluxDB tools.",
               },
               {
                 title: "Multi-channel notifications",
                 copy:
-                  "Email SMTP + Telegram Bot with per-alarm rules, cooldown, and contact priorities.",
+                  "Email via SMTP and Telegram Bot. Configurable rules per alarm, cooldown between sends, contact priorities, and escalation.",
+              },
+              {
+                title: "Store & Forward",
+                copy:
+                  "Write buffer with automatic retries for InfluxDB. Protects acquisition during transient historian outages.",
+              },
+              {
+                title: "Watchdog Supervisor",
+                copy:
+                  "Critical service monitoring with degradation alerts, multi-level health checks, and observability metrics.",
               },
             ],
           },
           architecture: {
             title: "Enterprise architecture",
-            tag: "Technology",
+            tag: "Data flow",
             steps: [
               {
-                title: "OPC UA Acquisition",
-                copy: "Siemens, Rockwell, Beckhoff PLCs → Async subscriptions → High-speed circular buffer.",
+                title: "Industrial layer (OPC UA)",
+                copy: "Siemens S7-1500/1200 PLCs, Rockwell, Beckhoff, and OPC UA sensors → Async subscriptions → High-speed circular buffer.",
               },
               {
-                title: "Historian + Cache",
-                copy: "InfluxDB 2.x (time-series) + PostgreSQL (metadata) + Redis 7.x (dedupe/cache).",
+                title: "Data layer",
+                copy: "InfluxDB 2.x for time-series + PostgreSQL 15+ for metadata/config + Redis 7.x for dedupe, cache, and rate limiting.",
               },
               {
-                title: "REST API + WebSocket",
-                copy: "FastAPI + Uvicorn, 3 WebSocket streams, JWT auth, rate limiting, and health checks.",
+                title: "Services layer",
+                copy: "FastAPI + Uvicorn with 3 WebSocket streams, complete REST API, JWT + MFA/TOTP, rate limiting, and multi-level health checks.",
               },
               {
-                title: "React Frontend",
-                copy: "React 18 + Vite + TailwindCSS + Three.js 3D + Recharts, full ES/EN i18n.",
+                title: "Presentation layer",
+                copy: "React 18 + Vite + TailwindCSS, 3D visualization with Three.js, charts with Recharts/ApexCharts, full ES/EN i18n.",
+              },
+              {
+                title: "External integrations",
+                copy: "Webhooks for events, CSV/JSON drop folder for ERP/MES, REST API for external systems, Telegram and Email for notifications.",
               },
             ],
           },
           security: {
             title: "Enterprise security",
-            tag: "Compliance",
+            tag: "Compliance ready",
             copy:
-              "The system implements enterprise-grade security with multi-factor authentication, complete auditing, and granular access control for regulated environments.",
+              "Industrial-grade security implementation with multi-factor authentication, complete action auditing, granular access control, and abuse protections. Ready for regulated environments and audits.",
             cards: [
               {
-                title: "JWT + MFA/TOTP",
+                title: "JWT + MFA authentication",
                 copy:
-                  "Token-based authentication with JWT, bcrypt for passwords, and MFA with TOTP codes.",
+                  "JWT tokens with refresh, bcrypt for password hashing, optional MFA with TOTP codes, and secure sessions.",
               },
               {
                 title: "Complete audit trail",
                 copy:
-                  "Event logging, configuration changes, and user actions with timestamps.",
+                  "Immutable logging of events, configuration changes, user actions, accesses, and modifications with timestamps.",
               },
               {
                 title: "Rate limiting + Watchdog",
                 copy:
-                  "API abuse protection, critical service supervisor, and degradation alerts.",
+                  "API abuse protection per IP/user, critical service supervisor, degradation alerts, and automatic recovery.",
               },
             ],
           },
+          pages: {
+            title: "System screens",
+            tag: "Frontend",
+            cards: [
+              { title: "Main Dashboard", copy: "Executive view with KPIs, configurable widgets, and real-time operational summary." },
+              { title: "Monitoring", copy: "Sensor visualization, OPC variables, and real-time trends with WebSocket updates." },
+              { title: "Alarms", copy: "Active alarm management, history, threshold configuration, and acknowledgement." },
+              { title: "Production", copy: "Shift reports, production metrics, PDF/Excel export, and batch management." },
+              { title: "Historical", copy: "InfluxDB historian queries with time ranges, aggregations, and trend visualization." },
+              { title: "AI Agent", copy: "Conversational chat with the system, natural language queries, and intelligent data analysis." },
+              { title: "Users", copy: "User management, roles, permissions, and system access configuration." },
+              { title: "Maintenance", copy: "Equipment dashboard, scheduled tasks, intervention history, and costs." },
+              { title: "ML Dashboard", copy: "Predictive model visualization, detected anomalies, and system recommendations." },
+              { title: "System Metrics", copy: "System health monitoring, performance metrics, and service status." },
+            ],
+          },
           roadmap: {
-            title: "Roadmap",
-            tag: "Evolution",
+            title: "Evolution roadmap",
+            tag: "Next steps",
             copy:
-              "Iterations focused on expanding OT/IT integrations, multi-plant capabilities, and advanced analytics.",
+              "The technical core is at enterprise level for acquisition, alarms, and historian. Next iterations focus on expanding industrial connectivity and analytical capabilities.",
             items: [
-              "MQTT, Modbus TCP, and edge computing connectors for industrial IoT.",
-              "ERP/MES integration with webhooks, scheduler, and electronic signature.",
-              "Multi-plant governance, HA/cluster, and optional computer vision.",
+              "MQTT, Modbus TCP/RTU, and edge computing connectors for industrial IoT expansion.",
+              "Deep ERP/MES integration with bidirectional webhooks, scheduler, and electronic signature.",
+              "Multi-plant governance with executive dashboards per business unit and comparatives.",
+              "High availability (HA) with clustering and automatic failover for critical environments.",
+              "Optional computer vision for visual inspection and online anomaly detection.",
             ],
           },
           demo: {
-            title: "Interactive demo",
-            tag: "Access",
+            title: "Video demo",
+            tag: "See it in action",
             copy:
-              "The demo provides complete navigation through all screens with simulated data from a real industrial plant.",
-            primary: "Request demo",
-            secondary: "Download documentation",
+              "Explore Smart Industrial Hub in action. The video shows complete navigation through all screens with simulated data from a chemical reactor, including real-time monitoring, alarm management, reports, and the AI agent.",
+            videoUrl: "https://www.youtube.com/watch?v=zU8yvxnpOGI",
+            primary: "Request demo access",
+            secondary: "Contact for documentation",
           },
-          footer: "Smart Industrial Hub v2.3 © 2025",
+          footer: "Smart Industrial Hub v2.3 · Intelligent Industrial Platform · © 2025",
         },
       };
 
@@ -822,6 +902,18 @@
                 </div>
               </section>
 
+              <section id="pages">
+                <SectionTitle tag={t.pages.tag} title={t.pages.title} />
+                <div className="grid-3">
+                  {t.pages.cards.map((card) => (
+                    <div className="card reveal" key={card.title}>
+                      <h3>{card.title}</h3>
+                      <p>{card.copy}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
               <section id="roadmap">
                 <SectionTitle tag={t.roadmap.tag} title={t.roadmap.title} />
                 <div className="split">
@@ -841,6 +933,34 @@
                 <SectionTitle tag={t.demo.tag} title={t.demo.title} />
                 <div className="cta reveal">
                   <p>{t.demo.copy}</p>
+                  <a 
+                    href="https://www.youtube.com/watch?v=zU8yvxnpOGI" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ 
+                      display: "block",
+                      margin: "20px 0", 
+                      borderRadius: "16px", 
+                      overflow: "hidden",
+                      maxWidth: "800px",
+                      background: "linear-gradient(135deg, var(--ink) 0%, var(--ink-2) 100%)",
+                      padding: "40px",
+                      textAlign: "center",
+                      textDecoration: "none",
+                      color: "white",
+                      transition: "transform 0.2s ease, box-shadow 0.2s ease"
+                    }}
+                    onMouseOver={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.3)"; }}
+                    onMouseOut={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
+                  >
+                    <div style={{ fontSize: "48px", marginBottom: "16px" }}>▶️</div>
+                    <div style={{ fontSize: "1.2rem", fontWeight: "600", marginBottom: "8px" }}>
+                      {lang === "es" ? "Ver demo en YouTube" : "Watch demo on YouTube"}
+                    </div>
+                    <div style={{ fontSize: "0.9rem", opacity: "0.8" }}>
+                      {lang === "es" ? "Navegación completa por todas las pantallas" : "Complete navigation through all screens"}
+                    </div>
+                  </a>
                   <div className="hero-cta">
                     <a className="btn primary" href="mailto:paul.alexander.pg@gmail.com">
                       {t.demo.primary}
