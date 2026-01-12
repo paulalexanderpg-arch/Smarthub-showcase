@@ -1,0 +1,1111 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Smart Industrial Hub - Pitch Comercial</title>
+    <meta
+      name="description"
+      content="Pitch comercial: Smart Industrial Hub - Plataforma industrial moderna vs soluciones legacy. OPC UA, historian, alarmas, reportes y AI."
+    />
+    <style>
+      :root {
+        --ink: #0e1116;
+        --ink-2: #1b2430;
+        --paper: #f7f2ea;
+        --accent: #0fa3a3;
+        --accent-2: #f08b25;
+        --accent-3: #d9b24c;
+        --muted: #5d6b75;
+        --line: rgba(14, 17, 22, 0.15);
+        --glass: rgba(255, 255, 255, 0.7);
+        --shadow: 0 26px 60px rgba(14, 17, 22, 0.2);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(circle at 12% 8%, rgba(15, 163, 163, 0.16), transparent 50%),
+          radial-gradient(circle at 88% 18%, rgba(240, 139, 37, 0.18), transparent 45%),
+          linear-gradient(120deg, #f3ede4 0%, #f7f2ea 55%, #fbf7f1 100%);
+        min-height: 100vh;
+      }
+
+      .page {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .grain {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+        mix-blend-mode: multiply;
+      }
+
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(16px);
+        background: rgba(247, 242, 234, 0.86);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 18px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-size: 12px;
+      }
+
+      .brand .logo {
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        background: conic-gradient(from 120deg, var(--accent), var(--accent-2), var(--accent));
+        box-shadow: 0 10px 20px rgba(15, 163, 163, 0.25);
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        font-size: 12px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--ink);
+        opacity: 0.7;
+        transition: 0.2s ease;
+      }
+
+      .nav-links a:hover {
+        opacity: 1;
+      }
+
+      .lang-btn {
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s ease;
+        margin-left: 8px;
+      }
+
+      .lang-btn:hover {
+        background: var(--accent-2);
+        transform: scale(1.05);
+      }
+
+      .hero {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 90px 28px 70px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 48px;
+        align-items: center;
+      }
+
+      .hero h1 {
+        font-family: "Georgia", serif;
+        font-size: clamp(2.4rem, 4vw, 3.8rem);
+        line-height: 1.05;
+        margin-bottom: 16px;
+      }
+
+      .hero p {
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.6;
+      }
+
+      .hero-cta {
+        margin-top: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .btn {
+        padding: 12px 20px;
+        border-radius: 16px;
+        border: none;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .btn.primary {
+        background: var(--ink);
+        color: white;
+        box-shadow: 0 16px 30px rgba(14, 17, 22, 0.2);
+      }
+
+      .btn.secondary {
+        background: transparent;
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .hero-card {
+        background: var(--glass);
+        border-radius: 28px;
+        padding: 28px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        position: relative;
+      }
+
+      .hero-card::after {
+        content: "";
+        position: absolute;
+        inset: 14px;
+        border-radius: 22px;
+        border: 1px dashed rgba(14, 17, 22, 0.15);
+        pointer-events: none;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+        gap: 16px;
+        margin-top: 20px;
+      }
+
+      .metric {
+        padding: 16px;
+        border-radius: 16px;
+        background: white;
+        border: 1px solid var(--line);
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 1.2rem;
+      }
+
+      .metric span {
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 70px 28px;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 22px;
+      }
+
+      .section-title h2 {
+        font-family: "Georgia", serif;
+        font-size: clamp(1.8rem, 3vw, 2.5rem);
+      }
+
+      .chip {
+        background: rgba(15, 163, 163, 0.14);
+        color: #006b6b;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 24px;
+        padding: 22px;
+        border: 1px solid var(--line);
+        box-shadow: 0 14px 30px rgba(14, 17, 22, 0.08);
+      }
+
+      .card h3 {
+        font-size: 1.05rem;
+        margin-bottom: 10px;
+      }
+
+      .card p {
+        color: var(--muted);
+        line-height: 1.5;
+        font-size: 0.95rem;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        align-items: center;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 14px;
+      }
+
+      .step {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        background: rgba(14, 17, 22, 0.04);
+        border-radius: 16px;
+        padding: 14px 16px;
+      }
+
+      .step span {
+        font-weight: 700;
+        color: var(--accent);
+      }
+
+      .cta {
+        background: linear-gradient(120deg, rgba(15, 163, 163, 0.2), rgba(240, 139, 37, 0.18));
+        border-radius: 32px;
+        padding: 36px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        display: grid;
+        gap: 18px;
+      }
+
+      footer {
+        padding: 40px 28px 60px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: all 0.7s ease;
+      }
+
+      .reveal.reveal-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 720px) {
+        .nav-inner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .nav-links {
+          gap: 10px;
+        }
+
+        .hero-card {
+          order: -1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="grain"></div>
+      <header class="nav">
+        <div class="nav-inner">
+          <div class="brand">
+            <div class="logo"></div>
+            Smart Industrial Hub
+          </div>
+          <nav class="nav-links">
+            <a href="#problema" data-i18n="nav_problem">Problema</a>
+            <a href="#solucion" data-i18n="nav_solution">Solución</a>
+            <a href="#comparativa" data-i18n="nav_compare">vs Competencia</a>
+            <a href="#platform" data-i18n="nav_platform">Plataforma</a>
+            <a href="#modules" data-i18n="nav_modules">Módulos</a>
+            <a href="#demo">Demo</a>
+            <a href="#pricing" data-i18n="nav_pricing">Modelo</a>
+            <button id="langToggle" class="lang-btn" title="Switch language">EN</button>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <!-- HERO -->
+        <section class="hero">
+          <div class="reveal">
+            <h1>Smart Industrial Hub</h1>
+            <p data-i18n="hero_desc">
+              La alternativa moderna a los SCADA legacy. Plataforma industrial de nueva generación
+              que unifica OPC UA, historian, alarmas inteligentes, reportes y AI en una sola solución.
+              Sin licencias por tag. Sin costos ocultos. Sin vendor lock-in.
+            </p>
+            <div class="hero-cta">
+              <a class="btn primary" href="#demo" data-i18n="hero_cta_demo">Ver demo</a>
+              <a class="btn secondary" href="#comparativa" data-i18n="hero_cta_why">¿Por qué elegirnos?</a>
+            </div>
+          </div>
+          <div class="hero-card reveal">
+            <strong data-i18n="hero_capabilities">Capacidades clave</strong>
+            <div class="hero-grid">
+              <div class="metric">
+                <strong>25,000+</strong>
+                <span data-i18n="hero_variables">Variables @ 1Hz</span>
+              </div>
+              <div class="metric">
+                <strong>Real-time</strong>
+                <span>3 WebSockets</span>
+              </div>
+              <div class="metric">
+                <strong>AI/ML</strong>
+                <span data-i18n="hero_agent">Agente integrado</span>
+              </div>
+              <div class="metric">
+                <strong>Multi-vendor</strong>
+                <span>Siemens, Rockwell, Beckhoff</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PROBLEMA -->
+        <section id="problema">
+          <div class="section-title reveal">
+            <span class="chip" data-i18n="chip_challenge">El desafío</span>
+            <h2 data-i18n="problem_title">El problema con los SCADA tradicionales</h2>
+          </div>
+          <div class="grid-3">
+            <div class="card reveal">
+              <h3 data-i18n="problem_cost_title">💰 Costos prohibitivos</h3>
+              <p data-i18n="problem_cost_desc">Licencias por tag, módulos adicionales cobrados, costos de mantenimiento anual del 20%+. Un sistema completo puede costar $50K-$200K.</p>
+            </div>
+            <div class="card reveal">
+              <h3 data-i18n="problem_lock_title">🔒 Vendor lock-in</h3>
+              <p data-i18n="problem_lock_desc">Formatos propietarios, dependencia de integradores específicos, migración costosa o imposible.</p>
+            </div>
+            <div class="card reveal">
+              <h3 data-i18n="problem_legacy_title">🦕 Tecnología legacy</h3>
+              <p data-i18n="problem_legacy_desc">Interfaces de los 2000s, sin APIs REST, sin WebSockets, sin mobile, sin AI. Difícil de integrar con sistemas modernos.</p>
+            </div>
+            <div class="card reveal">
+              <h3 data-i18n="problem_frag_title">📊 Fragmentación</h3>
+              <p data-i18n="problem_frag_desc">SCADA, historian, alarmas, reportes = 4 productos diferentes de 4 vendors. Integración manual y frágil.</p>
+            </div>
+            <div class="card reveal">
+              <h3 data-i18n="problem_time_title">🐌 Tiempo de implementación</h3>
+              <p data-i18n="problem_time_desc">Meses de configuración, consultores externos, capacitación especializada costosa.</p>
+            </div>
+            <div class="card reveal">
+              <h3 data-i18n="problem_custom_title">🔧 Personalización limitada</h3>
+              <p data-i18n="problem_custom_desc">Cualquier cambio requiere servicios profesionales del vendor. Sin acceso al código fuente.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SOLUCIÓN -->
+        <section id="solucion">
+          <div class="section-title reveal">
+            <span class="chip" data-i18n="chip_proposal">Nuestra propuesta</span>
+            <h2 data-i18n="solution_title">Smart Industrial Hub: La solución moderna</h2>
+          </div>
+          <div class="split">
+            <p class="reveal" data-i18n="solution_desc">
+              Una plataforma unificada que combina lo mejor de SCADA, Historian, gestión de alarmas,
+              reportes de producción y AI en una sola solución. Stack tecnológico moderno, 
+              arquitectura escalable, y modelo de negocio transparente.
+            </p>
+            <div class="timeline">
+              <div class="step reveal"><span>✓</span><div><strong data-i18n="sol_all_title">Todo incluido</strong> - <span data-i18n="sol_all_desc">SCADA + Historian + Alarmas + Reportes + AI en un paquete.</span></div></div>
+              <div class="step reveal"><span>✓</span><div><strong data-i18n="sol_price_title">Precio transparente</strong> - <span data-i18n="sol_price_desc">Sin licencias por tag, sin costos ocultos.</span></div></div>
+              <div class="step reveal"><span>✓</span><div><strong data-i18n="sol_stack_title">Stack moderno</strong> - <span data-i18n="sol_stack_desc">APIs REST, WebSockets, React, Python, Docker.</span></div></div>
+              <div class="step reveal"><span>✓</span><div><strong>Multi-vendor</strong> - <span data-i18n="sol_multi_desc">Siemens, Rockwell, Beckhoff, cualquier OPC UA.</span></div></div>
+              <div class="step reveal"><span>✓</span><div><strong data-i18n="sol_custom_title">Personalizable</strong> - <span data-i18n="sol_custom_desc">Adaptable a tus procesos, sin dependencia de consultores externos.</span></div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- COMPARATIVA VS COMPETENCIA -->
+        <section id="comparativa">
+          <div class="section-title reveal">
+            <span class="chip" data-i18n="chip_analysis">Análisis competitivo</span>
+            <h2 data-i18n="compare_title">Smart Industrial Hub vs Alternativas</h2>
+          </div>
+          
+          <!-- Tabla comparativa con estilo card -->
+          <div class="reveal" style="overflow-x: auto; margin-bottom: 30px;">
+            <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 14px 30px rgba(14,17,22,0.08);">
+              <thead>
+                <tr style="background: var(--ink); color: white;">
+                  <th style="padding: 16px; text-align: left;" data-i18n="th_feature">Característica</th>
+                  <th style="padding: 16px; text-align: center; background: var(--accent);">Smart Industrial Hub</th>
+                  <th style="padding: 16px; text-align: center;">Ignition</th>
+                  <th style="padding: 16px; text-align: center;">AVEVA</th>
+                  <th style="padding: 16px; text-align: center;">Wonderware</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--line); background: rgba(240,139,37,0.08);">
+                  <td style="padding: 14px;"><strong>💰 Licencia base</strong></td>
+                  <td style="padding: 14px; text-align: center; color: var(--accent); font-weight: 600;">Consultar</td>
+                  <td style="padding: 14px; text-align: center; color: #c00; font-weight: 600;">$15,000 - $50,000</td>
+                  <td style="padding: 14px; text-align: center; color: #c00; font-weight: 600;">$50,000 - $200,000+</td>
+                  <td style="padding: 14px; text-align: center; color: #c00; font-weight: 600;">$30,000 - $100,000+</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--line); background: rgba(240,139,37,0.08);">
+                  <td style="padding: 14px;"><strong>💰 Costo por tag</strong></td>
+                  <td style="padding: 14px; text-align: center; color: var(--accent); font-weight: 600;">$0 (ilimitado)</td>
+                  <td style="padding: 14px; text-align: center;">Incluido en licencia</td>
+                  <td style="padding: 14px; text-align: center; color: #c00;">$10 - $25 por tag</td>
+                  <td style="padding: 14px; text-align: center; color: #c00;">$5 - $15 por tag</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--line); background: rgba(240,139,37,0.08);">
+                  <td style="padding: 14px;"><strong>💰 Mantenimiento anual</strong></td>
+                  <td style="padding: 14px; text-align: center; color: var(--accent); font-weight: 600;">Incluido</td>
+                  <td style="padding: 14px; text-align: center; color: #c00;">18-22% del coste licencia</td>
+                  <td style="padding: 14px; text-align: center; color: #c00;">20-25% del coste licencia</td>
+                  <td style="padding: 14px; text-align: center; color: #c00;">18-22% del coste licencia</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--line); background: rgba(240,139,37,0.08);">
+                  <td style="padding: 14px;"><strong>💰 Historian adicional</strong></td>
+                  <td style="padding: 14px; text-align: center; color: var(--accent); font-weight: 600;">Incluido (InfluxDB)</td>
+                  <td style="padding: 14px; text-align: center;">Incluido</td>
+                  <td style="padding: 14px; text-align: center; color: #c00;">$20,000 - $80,000 extra</td>
+                  <td style="padding: 14px; text-align: center; color: #c00;">$15,000 - $50,000 extra</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--line);">
+                  <td style="padding: 14px;"><strong>AI/ML integrado</strong></td>
+                  <td style="padding: 14px; text-align: center;">✅ RAG + LLM + Agente</td>
+                  <td style="padding: 14px; text-align: center;">❌ No incluido</td>
+                  <td style="padding: 14px; text-align: center;">⚠️ Módulo separado (extra)</td>
+                  <td style="padding: 14px; text-align: center;">❌ No incluido</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--line); background: rgba(15,163,163,0.05);">
+                  <td style="padding: 14px;"><strong>API REST nativa</strong></td>
+                  <td style="padding: 14px; text-align: center;">✅ FastAPI documentada</td>
+                  <td style="padding: 14px; text-align: center;">✅ Buena</td>
+                  <td style="padding: 14px; text-align: center;">⚠️ Limitada</td>
+                  <td style="padding: 14px; text-align: center;">⚠️ Legacy SOAP</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--line);">
+                  <td style="padding: 14px;"><strong>WebSocket real-time</strong></td>
+                  <td style="padding: 14px; text-align: center;">✅ 3 streams dedicados</td>
+                  <td style="padding: 14px; text-align: center;">✅</td>
+                  <td style="padding: 14px; text-align: center;">⚠️ Polling</td>
+                  <td style="padding: 14px; text-align: center;">❌ Polling</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--line); background: rgba(15,163,163,0.05);">
+                  <td style="padding: 14px;"><strong>Frontend moderno</strong></td>
+                  <td style="padding: 14px; text-align: center;">✅ React 18 + Tailwind</td>
+                  <td style="padding: 14px; text-align: center;">⚠️ Perspective (Java)</td>
+                  <td style="padding: 14px; text-align: center;">❌ .NET Legacy</td>
+                  <td style="padding: 14px; text-align: center;">❌ ActiveX/OLE</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--line);">
+                  <td style="padding: 14px;"><strong>Docker/Cloud native</strong></td>
+                  <td style="padding: 14px; text-align: center;">✅ Compose ready</td>
+                  <td style="padding: 14px; text-align: center;">✅</td>
+                  <td style="padding: 14px; text-align: center;">⚠️ Cloud opcional</td>
+                  <td style="padding: 14px; text-align: center;">❌ On-premise only</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--line); background: rgba(15,163,163,0.05);">
+                  <td style="padding: 14px;"><strong>Multi-vendor OPC UA</strong></td>
+                  <td style="padding: 14px; text-align: center;">✅ Siemens, Rockwell, Beckhoff</td>
+                  <td style="padding: 14px; text-align: center;">✅</td>
+                  <td style="padding: 14px; text-align: center;">✅</td>
+                  <td style="padding: 14px; text-align: center;">✅</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--line);">
+                  <td style="padding: 14px;"><strong data-i18n="table_customizable">Personalizable</strong></td>
+                  <td style="padding: 14px; text-align: center;">✅ <span data-i18n="table_custom_us">APIs abiertas + configuración flexible</span></td>
+                  <td style="padding: 14px; text-align: center;">⚠️ <span data-i18n="table_custom_ign">Parcial (módulos)</span></td>
+                  <td style="padding: 14px; text-align: center;">❌ <span data-i18n="table_custom_prop">Requiere consultoría</span></td>
+                  <td style="padding: 14px; text-align: center;">❌ <span data-i18n="table_custom_prop">Requiere consultoría</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--line); background: rgba(15,163,163,0.05);">
+                  <td style="padding: 14px;"><strong>Curva de aprendizaje</strong></td>
+                  <td style="padding: 14px; text-align: center;">✅ Stack estándar (Python/React)</td>
+                  <td style="padding: 14px; text-align: center;">⚠️ Jython propietario</td>
+                  <td style="padding: 14px; text-align: center;">❌ Certificaciones requeridas</td>
+                  <td style="padding: 14px; text-align: center;">❌ Ecosistema cerrado</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--line);">
+                  <td style="padding: 14px;"><strong>Reportes PDF/Excel</strong></td>
+                  <td style="padding: 14px; text-align: center;">✅ Incluido</td>
+                  <td style="padding: 14px; text-align: center;">✅</td>
+                  <td style="padding: 14px; text-align: center;">⚠️ Módulo adicional</td>
+                  <td style="padding: 14px; text-align: center;">⚠️ Módulo adicional</td>
+                </tr>
+                <tr>
+                  <td style="padding: 14px;"><strong data-i18n="impl_time">Tiempo implementación</strong></td>
+                  <td style="padding: 14px; text-align: center; color: var(--accent); font-weight: 600;">3-5 <span data-i18n="weeks">semanas</span></td>
+                  <td style="padding: 14px; text-align: center;">2-4 <span data-i18n="months">meses</span></td>
+                  <td style="padding: 14px; text-align: center;">2-6 <span data-i18n="months">meses</span></td>
+                  <td style="padding: 14px; text-align: center;">1-3 <span data-i18n="months">meses</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Resumen de costos -->
+          <div class="card reveal" style="background: linear-gradient(135deg, rgba(240,139,37,0.1) 0%, rgba(15,163,163,0.1) 100%); border: 2px solid var(--accent); margin-bottom: 30px;">
+            <h3 style="text-align: center; margin-bottom: 16px;">💡 Ejemplo: Planta con 10,000 tags</h3>
+            <div class="grid-3" style="gap: 20px;">
+              <div style="text-align: center;">
+                <p style="font-size: 0.9rem; color: var(--muted);">AVEVA / Wonderware</p>
+                <p style="font-size: 1.5rem; font-weight: 700; color: #c00;">$80,000 - $150,000</p>
+                <p style="font-size: 0.8rem; color: var(--muted);">+ Historian + Mantenimiento anual</p>
+              </div>
+              <div style="text-align: center;">
+                <p style="font-size: 0.9rem; color: var(--muted);">Ignition</p>
+                <p style="font-size: 1.5rem; font-weight: 700; color: #c00;">$25,000 - $50,000</p>
+                <p style="font-size: 0.8rem; color: var(--muted);">+ Módulos adicionales</p>
+              </div>
+              <div style="text-align: center;">
+                <p style="font-size: 0.9rem; color: var(--muted);">Smart Industrial Hub</p>
+                <p style="font-size: 1.5rem; font-weight: 700; color: var(--accent);">Consultar</p>
+                <p style="font-size: 0.8rem; color: var(--muted);">Todo incluido, sin sorpresas</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ventajas clave -->
+          <div class="grid-3">
+            <div class="card reveal">
+              <h3 data-i18n="adv_speed">🚀 Velocidad</h3>
+              <p data-i18n="adv_speed_desc">Implementación en días, no meses. Stack moderno que tu equipo de TI ya conoce (Python, React, Docker).</p>
+            </div>
+            <div class="card reveal">
+              <h3 data-i18n="adv_ai">💡 AI integrado</h3>
+              <p data-i18n="adv_ai_desc">Único en el mercado con agente conversacional que consulta el historian en lenguaje natural.</p>
+            </div>
+            <div class="card reveal">
+              <h3 data-i18n="adv_cost">💰 Sin costos ocultos</h3>
+              <p data-i18n="adv_cost_desc">Historian, alarmas, reportes, WebSockets y API incluidos. Sin licencias por tag.</p>
+            </div>
+            <div class="card reveal">
+              <h3 data-i18n="adv_lock">� Personalizable</h3>
+              <p data-i18n="adv_lock_desc">APIs abiertas y configuración flexible. Adaptable a tus procesos sin depender de consultores externos.</p>
+            </div>
+            <div class="card reveal">
+              <h3 data-i18n="adv_multi">🌐 Multi-vendor</h3>
+              <p data-i18n="adv_multi_desc">Siemens, Rockwell, Beckhoff y cualquier PLC con OPC UA. Sin adaptadores extra.</p>
+            </div>
+            <div class="card reveal">
+              <h3 data-i18n="adv_modern">📱 Moderno</h3>
+              <p data-i18n="adv_modern_desc">Interfaz responsive, móvil-ready. Sin ActiveX ni plugins obsoletos.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="platform">
+          <div class="section-title reveal">
+            <span class="chip">Stack tecnologico</span>
+            <h2>Plataforma de alto rendimiento</h2>
+          </div>
+          <div class="grid-3">
+            <div class="card reveal">
+              <h3>3 WebSockets dedicados</h3>
+              <p>Streams independientes para datos OPC, alarmas activas y KPIs con broadcast optimizado.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Historian InfluxDB 2.x</h3>
+              <p>Batch writes de alta velocidad, consultas por rango y agregaciones avanzadas.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Backend FastAPI + Redis</h3>
+              <p>API REST modular, PostgreSQL para metadata, Redis para dedupe/cache y Store & Forward.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Frontend React 18</h3>
+              <p>Vite, Tailwind, visualizacion 3D opcional, charts y i18n completo ES/EN.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="modules">
+          <div class="section-title reveal">
+            <span class="chip">Core del producto</span>
+            <h2>Modulos del sistema</h2>
+          </div>
+          <div class="grid-3">
+            <div class="card reveal">
+              <h3>Lector OPC UA</h3>
+              <p>Suscripciones async, decodificacion ExtensionObject y reconexion con backoff.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Motor de alarmas avanzado</h3>
+              <p>5 niveles, RTN, deadband, dedupe Redis y notificaciones por regla.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Templates MTP</h3>
+              <p>Instanciacion masiva con campos base, derivados y calculados.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Reportes de produccion</h3>
+              <p>Turnos con build/close/export a PDF, Excel, JSON y drop folder ERP.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Agente AI opcional</h3>
+              <p>Ollama + RAG dual, smart routing y herramientas de consulta InfluxDB.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Notificaciones multicanal</h3>
+              <p>Email SMTP y Telegram con reglas, cooldown y escalamiento.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="architecture">
+          <div class="section-title reveal">
+            <span class="chip">Flujo de datos</span>
+            <h2>Arquitectura enterprise</h2>
+          </div>
+          <div class="timeline">
+            <div class="step reveal"><span>01</span><div><strong>Capa industrial</strong> - PLCs y dispositivos OPC UA con suscripciones async.</div></div>
+            <div class="step reveal"><span>02</span><div><strong>Capa de datos</strong> - InfluxDB + PostgreSQL + Redis.</div></div>
+            <div class="step reveal"><span>03</span><div><strong>Capa de servicios</strong> - FastAPI, WebSockets, JWT + MFA, rate limiting.</div></div>
+            <div class="step reveal"><span>04</span><div><strong>Capa de UI</strong> - React, dashboards, tendencias y 3D opcional.</div></div>
+            <div class="step reveal"><span>05</span><div><strong>Integraciones</strong> - ERP/MES, webhooks, drop folder y notificaciones.</div></div>
+          </div>
+        </section>
+
+        <section id="security">
+          <div class="section-title reveal">
+            <span class="chip">Compliance ready</span>
+            <h2>Seguridad enterprise</h2>
+          </div>
+          <div class="split">
+            <p class="reveal">
+              Seguridad de grado industrial con MFA, auditoria completa y control de acceso granular.
+              Preparado para entornos regulados y auditorias.
+            </p>
+            <div class="grid-3">
+              <div class="card reveal"><h3>JWT + MFA</h3><p>Tokens seguros, bcrypt y TOTP opcional.</p></div>
+              <div class="card reveal"><h3>Audit trail</h3><p>Registro de acciones, cambios y accesos con timestamps.</p></div>
+              <div class="card reveal"><h3>Rate limiting</h3><p>Proteccion contra abuso y watchdog de servicios criticos.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="pages">
+          <div class="section-title reveal">
+            <span class="chip">Frontend</span>
+            <h2>Pantallas del sistema</h2>
+          </div>
+          <div class="grid-3">
+            <div class="card reveal"><h3>Dashboard</h3><p>KPIs y resumen operativo.</p></div>
+            <div class="card reveal"><h3>Monitoring</h3><p>Variables OPC y tendencias real-time.</p></div>
+            <div class="card reveal"><h3>Alarmas</h3><p>Activas, historico y configuracion.</p></div>
+            <div class="card reveal"><h3>Produccion</h3><p>Turnos, export y lotes.</p></div>
+            <div class="card reveal"><h3>Historico</h3><p>Consultas InfluxDB por rango.</p></div>
+            <div class="card reveal"><h3>AI Agent</h3><p>Chat con consultas en lenguaje natural.</p></div>
+          </div>
+        </section>
+
+        <section id="roadmap">
+          <div class="section-title reveal">
+            <span class="chip">Proximos pasos</span>
+            <h2>Roadmap de evolucion</h2>
+          </div>
+          <div class="split">
+            <p class="reveal">El core tecnico ya es enterprise. El roadmap amplifica conectividad y analitica.</p>
+            <div class="timeline">
+              <div class="step reveal"><span>01</span><div>Conectores MQTT y Modbus para IoT industrial.</div></div>
+              <div class="step reveal"><span>02</span><div>Integracion ERP/MES bidireccional con scheduler.</div></div>
+              <div class="step reveal"><span>03</span><div>Gobierno multi-planta y dashboards ejecutivos.</div></div>
+              <div class="step reveal"><span>04</span><div>Alta disponibilidad con clustering y failover.</div></div>
+              <div class="step reveal"><span>05</span><div>Computer vision opcional para inspeccion.</div></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="demo">
+          <div class="section-title reveal">
+            <span class="chip" data-i18n="chip_action">Ver en acción</span>
+            <h2 data-i18n="demo_title">Demo del sistema</h2>
+          </div>
+          <div class="cta reveal">
+            <p data-i18n="demo_desc">
+              Navegación completa por todas las pantallas con datos simulados de un reactor
+              químico: monitoreo en tiempo real, alarmas, reportes y el agente AI conversacional.
+            </p>
+            <a 
+              href="https://www.youtube.com/watch?v=zU8yvxnpOGI" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style="display: block; margin: 20px 0; border-radius: 16px; overflow: hidden; max-width: 600px; background: linear-gradient(135deg, var(--ink) 0%, var(--ink-2) 100%); padding: 30px; text-align: center; text-decoration: none; color: white;"
+            >
+              <div style="font-size: 40px; margin-bottom: 12px;">▶️</div>
+              <div style="font-size: 1.1rem; font-weight: 600;" data-i18n="demo_youtube">Ver demo en YouTube</div>
+              <div style="font-size: 0.85rem; opacity: 0.8; margin-top: 6px;" data-i18n="demo_youtube_sub">Navegación completa del sistema</div>
+            </a>
+            <div class="hero-cta">
+              <a class="btn primary" href="mailto:paul.alexander.pg@gmail.com" data-i18n="cta_schedule">Agendar presentación</a>
+              <a class="btn secondary" href="mailto:paul.alexander.pg@gmail.com" data-i18n="cta_proposal">Solicitar propuesta</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- MODELO DE LICENCIAMIENTO -->
+        <section id="pricing">
+          <div class="section-title reveal">
+            <span class="chip" data-i18n="chip_flexible">Modelo flexible</span>
+            <h2 data-i18n="pricing_title">Licenciamiento transparente</h2>
+          </div>
+          <div class="grid-3">
+            <div class="card reveal" style="border: 2px solid var(--line);">
+              <h3 style="color: var(--muted);">Starter</h3>
+              <p style="margin-bottom: 16px;" data-i18n="tier_starter_desc">Ideal para plantas pequeñas o proyectos piloto.</p>
+              <ul style="list-style: none; font-size: 0.9rem; color: var(--muted);">
+                <li style="padding: 6px 0;" data-i18n="tier_5k_vars">✓ Hasta 5,000 variables</li>
+                <li style="padding: 6px 0;" data-i18n="tier_1_server">✓ 1 servidor</li>
+                <li style="padding: 6px 0;" data-i18n="tier_historian">✓ Historian incluido</li>
+                <li style="padding: 6px 0;" data-i18n="tier_email">✓ Email notifications</li>
+                <li style="padding: 6px 0;" data-i18n="tier_reports_basic">✓ Reportes básicos</li>
+                <li style="padding: 6px 0;" data-i18n="tier_support_email">✓ Soporte email</li>
+              </ul>
+            </div>
+            <div class="card reveal" style="border: 2px solid var(--accent); transform: scale(1.02);">
+              <h3 style="color: var(--accent);">Professional ⭐</h3>
+              <p style="margin-bottom: 16px;" data-i18n="tier_pro_desc">Para plantas medianas con necesidades completas.</p>
+              <ul style="list-style: none; font-size: 0.9rem; color: var(--muted);">
+                <li style="padding: 6px 0;" data-i18n="tier_25k_vars">✓ Hasta 25,000 variables</li>
+                <li style="padding: 6px 0;" data-i18n="tier_historian_alarms">✓ Historian + Motor de alarmas</li>
+                <li style="padding: 6px 0;" data-i18n="tier_email_telegram">✓ Email + Telegram</li>
+                <li style="padding: 6px 0;" data-i18n="tier_reports_full">✓ Reportes PDF/Excel</li>
+                <li style="padding: 6px 0;" data-i18n="tier_ai">✓ Agente AI incluido</li>
+                <li style="padding: 6px 0;" data-i18n="tier_support_priority">✓ Soporte prioritario</li>
+              </ul>
+            </div>
+            <div class="card reveal" style="border: 2px solid var(--line);">
+              <h3 style="color: var(--muted);">Enterprise</h3>
+              <p style="margin-bottom: 16px;" data-i18n="tier_ent_desc">Para operaciones multi-planta o críticas.</p>
+              <ul style="list-style: none; font-size: 0.9rem; color: var(--muted);">
+                <li style="padding: 6px 0;" data-i18n="tier_unlimited">✓ Variables ilimitadas</li>
+                <li style="padding: 6px 0;" data-i18n="tier_ha">✓ Alta disponibilidad</li>
+                <li style="padding: 6px 0;" data-i18n="tier_custom">✓ Integraciones custom</li>
+                <li style="padding: 6px 0;" data-i18n="tier_multi">✓ Multi-planta</li>
+                <li style="padding: 6px 0;" data-i18n="tier_sla">✓ SLA 24/7</li>
+                <li style="padding: 6px 0;" data-i18n="tier_training">✓ Capacitación incluida</li>
+              </ul>
+            </div>
+          </div>
+          <p class="reveal" style="text-align: center; margin-top: 30px; color: var(--muted); font-size: 0.9rem;" data-i18n="pricing_footer">
+            Todos los planes incluyen: Historian InfluxDB, Motor de alarmas, 3 WebSockets, API REST, i18n ES/EN. Sin licencias por tag. Sin costos ocultos.
+          </p>
+        </section>
+
+        <!-- CTA FINAL -->
+        <section>
+          <div class="cta reveal" style="text-align: center;">
+            <h2 style="font-family: Georgia, serif; font-size: 1.8rem; margin-bottom: 10px;" data-i18n="cta_title">¿Listo para modernizar tu planta?</h2>
+            <p style="max-width: 600px; margin: 0 auto 20px;" data-i18n="cta_desc">
+              Agenda una presentación personalizada donde mostraremos cómo Smart Industrial Hub
+              puede resolver los desafíos específicos de tu operación.
+            </p>
+            <div class="hero-cta" style="justify-content: center;">
+              <a class="btn primary" href="mailto:paul.alexander.pg@gmail.com" data-i18n="cta_schedule">Agendar presentación</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer data-i18n="footer">Smart Industrial Hub v2.3 · Plataforma Industrial Inteligente · 2025</footer>
+    </div>
+
+    <script>
+      // ============ REVEAL ANIMATION ============
+      const nodes = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("reveal-in");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      nodes.forEach((node) => observer.observe(node));
+
+      // ============ i18n TRANSLATIONS ============
+      const translations = {
+        es: {
+          // Nav
+          nav_problem: "Problema",
+          nav_solution: "Solución",
+          nav_compare: "vs Competencia",
+          nav_platform: "Plataforma",
+          nav_modules: "Módulos",
+          nav_pricing: "Modelo",
+          // Hero
+          hero_desc: "La alternativa moderna a los SCADA legacy. Plataforma industrial de nueva generación que unifica OPC UA, historian, alarmas inteligentes, reportes y AI en una sola solución. Sin licencias por tag. Sin costos ocultos. Sin vendor lock-in.",
+          hero_cta_demo: "Ver demo",
+          hero_cta_why: "¿Por qué elegirnos?",
+          hero_capabilities: "Capacidades clave",
+          hero_variables: "Variables @ 1Hz",
+          hero_agent: "Agente integrado",
+          // Problem section
+          chip_challenge: "El desafío",
+          problem_title: "El problema con los SCADA tradicionales",
+          problem_cost_title: "💰 Costos prohibitivos",
+          problem_cost_desc: "Licencias por tag, módulos adicionales cobrados, costos de mantenimiento anual del 20%+. Un sistema completo puede costar $50K-$200K.",
+          problem_lock_title: "🔒 Vendor lock-in",
+          problem_lock_desc: "Formatos propietarios, dependencia de integradores específicos, migración costosa o imposible.",
+          problem_legacy_title: "🦕 Tecnología legacy",
+          problem_legacy_desc: "Interfaces de los 2000s, sin APIs REST, sin WebSockets, sin mobile, sin AI. Difícil de integrar con sistemas modernos.",
+          problem_frag_title: "📊 Fragmentación",
+          problem_frag_desc: "SCADA, historian, alarmas, reportes = 4 productos diferentes de 4 vendors. Integración manual y frágil.",
+          problem_time_title: "🐌 Tiempo de implementación",
+          problem_time_desc: "Meses de configuración, consultores externos, capacitación especializada costosa.",
+          problem_custom_title: "🔧 Personalización limitada",
+          problem_custom_desc: "Cualquier cambio requiere servicios profesionales del vendor. Sin acceso al código fuente.",
+          // Solution section
+          chip_proposal: "Nuestra propuesta",
+          solution_title: "Smart Industrial Hub: La solución moderna",
+          solution_desc: "Una plataforma unificada que combina lo mejor de SCADA, Historian, gestión de alarmas, reportes de producción y AI en una sola solución. Stack tecnológico moderno, arquitectura escalable, y modelo de negocio transparente.",
+          sol_all_title: "Todo incluido",
+          sol_all_desc: "SCADA + Historian + Alarmas + Reportes + AI en un paquete.",
+          sol_price_title: "Precio transparente",
+          sol_price_desc: "Sin licencias por tag, sin costos ocultos.",
+          sol_stack_title: "Stack moderno",
+          sol_stack_desc: "APIs REST, WebSockets, React, Python, Docker.",
+          sol_multi_desc: "Siemens, Rockwell, Beckhoff, cualquier OPC UA.",
+          sol_custom_title: "Personalizable",
+          sol_custom_desc: "Adaptable a tus procesos, sin dependencia de consultores externos.",
+          // Comparison section
+          chip_analysis: "Análisis competitivo",
+          compare_title: "Smart Industrial Hub vs Alternativas",
+          th_feature: "Característica",
+          impl_time: "Tiempo implementación",
+          weeks: "semanas",
+          months: "meses",
+          table_customizable: "Personalizable",
+          table_custom_us: "APIs abiertas + configuración flexible",
+          table_custom_ign: "Parcial (módulos)",
+          table_custom_prop: "Requiere consultoría",
+          // Advantages
+          adv_speed: "🚀 Velocidad",
+          adv_speed_desc: "Implementación en días, no meses. Stack moderno que tu equipo de TI ya conoce (Python, React, Docker).",
+          adv_ai: "💡 AI integrado",
+          adv_ai_desc: "Único en el mercado con agente conversacional que consulta el historian en lenguaje natural.",
+          adv_cost: "💰 Sin costos ocultos",
+          adv_cost_desc: "Historian, alarmas, reportes, WebSockets y API incluidos. Sin licencias por tag.",
+          adv_lock: "� Personalizable",
+          adv_lock_desc: "APIs abiertas y configuración flexible. Adaptable a tus procesos sin depender de consultores externos.",
+          adv_multi: "🌐 Multi-vendor",
+          adv_multi_desc: "Siemens, Rockwell, Beckhoff y cualquier PLC con OPC UA. Sin adaptadores extra.",
+          adv_modern: "📱 Moderno",
+          adv_modern_desc: "Interfaz responsive, móvil-ready. Sin ActiveX ni plugins obsoletos.",
+          // Demo section
+          chip_action: "Ver en acción",
+          demo_title: "Demo del sistema",
+          demo_desc: "Navegación completa por todas las pantallas con datos simulados de un reactor químico: monitoreo en tiempo real, alarmas, reportes y el agente AI conversacional.",
+          demo_youtube: "Ver demo en YouTube",
+          demo_youtube_sub: "Navegación completa del sistema",
+          cta_schedule: "Agendar presentación",
+          cta_proposal: "Solicitar propuesta",
+          // Pricing section
+          chip_flexible: "Modelo flexible",
+          pricing_title: "Licenciamiento transparente",
+          tier_starter_desc: "Ideal para plantas pequeñas o proyectos piloto.",
+          tier_5k_vars: "✓ Hasta 5,000 variables",
+          tier_1_server: "✓ 1 servidor",
+          tier_historian: "✓ Historian incluido",
+          tier_email: "✓ Email notifications",
+          tier_reports_basic: "✓ Reportes básicos",
+          tier_support_email: "✓ Soporte email",
+          tier_pro_desc: "Para plantas medianas con necesidades completas.",
+          tier_25k_vars: "✓ Hasta 25,000 variables",
+          tier_historian_alarms: "✓ Historian + Motor de alarmas",
+          tier_email_telegram: "✓ Email + Telegram",
+          tier_reports_full: "✓ Reportes PDF/Excel",
+          tier_ai: "✓ Agente AI incluido",
+          tier_support_priority: "✓ Soporte prioritario",
+          tier_ent_desc: "Para operaciones multi-planta o críticas.",
+          tier_unlimited: "✓ Variables ilimitadas",
+          tier_ha: "✓ Alta disponibilidad",
+          tier_custom: "✓ Integraciones custom",
+          tier_multi: "✓ Multi-planta",
+          tier_sla: "✓ SLA 24/7",
+          tier_training: "✓ Capacitación incluida",
+          pricing_footer: "Todos los planes incluyen: Historian InfluxDB, Motor de alarmas, 3 WebSockets, API REST, i18n ES/EN. Sin licencias por tag. Sin costos ocultos.",
+          // CTA
+          cta_title: "¿Listo para modernizar tu planta?",
+          cta_desc: "Agenda una presentación personalizada donde mostraremos cómo Smart Industrial Hub puede resolver los desafíos específicos de tu operación.",
+          // Footer
+          footer: "Smart Industrial Hub v2.3 · Plataforma Industrial Inteligente · 2025"
+        },
+        en: {
+          // Nav
+          nav_problem: "Problem",
+          nav_solution: "Solution",
+          nav_compare: "vs Competition",
+          nav_platform: "Platform",
+          nav_modules: "Modules",
+          nav_pricing: "Pricing",
+          // Hero
+          hero_desc: "The modern alternative to legacy SCADA. Next-generation industrial platform that unifies OPC UA, historian, smart alarms, reports and AI in a single solution. No per-tag licenses. No hidden costs. No vendor lock-in.",
+          hero_cta_demo: "Watch demo",
+          hero_cta_why: "Why choose us?",
+          hero_capabilities: "Key capabilities",
+          hero_variables: "Variables @ 1Hz",
+          hero_agent: "Integrated agent",
+          // Problem section
+          chip_challenge: "The challenge",
+          problem_title: "The problem with traditional SCADA",
+          problem_cost_title: "💰 Prohibitive costs",
+          problem_cost_desc: "Per-tag licenses, extra modules charged separately, 20%+ annual maintenance costs. A complete system can cost $50K-$200K.",
+          problem_lock_title: "🔒 Vendor lock-in",
+          problem_lock_desc: "Proprietary formats, dependency on specific integrators, costly or impossible migration.",
+          problem_legacy_title: "🦕 Legacy technology",
+          problem_legacy_desc: "2000s interfaces, no REST APIs, no WebSockets, no mobile, no AI. Difficult to integrate with modern systems.",
+          problem_frag_title: "📊 Fragmentation",
+          problem_frag_desc: "SCADA, historian, alarms, reports = 4 different products from 4 vendors. Manual and fragile integration.",
+          problem_time_title: "🐌 Implementation time",
+          problem_time_desc: "Months of configuration, external consultants, expensive specialized training.",
+          problem_custom_title: "🔧 Limited customization",
+          problem_custom_desc: "Any change requires vendor professional services. No source code access.",
+          // Solution section
+          chip_proposal: "Our proposal",
+          solution_title: "Smart Industrial Hub: The modern solution",
+          solution_desc: "A unified platform combining the best of SCADA, Historian, alarm management, production reports and AI in a single solution. Modern tech stack, scalable architecture, and transparent business model.",
+          sol_all_title: "All-inclusive",
+          sol_all_desc: "SCADA + Historian + Alarms + Reports + AI in one package.",
+          sol_price_title: "Transparent pricing",
+          sol_price_desc: "No per-tag licenses, no hidden costs.",
+          sol_stack_title: "Modern stack",
+          sol_stack_desc: "REST APIs, WebSockets, React, Python, Docker.",
+          sol_multi_desc: "Siemens, Rockwell, Beckhoff, any OPC UA.",
+          sol_custom_title: "Customizable",
+          sol_custom_desc: "Adaptable to your processes, no dependency on external consultants.",
+          // Comparison section
+          chip_analysis: "Competitive analysis",
+          compare_title: "Smart Industrial Hub vs Alternatives",
+          th_feature: "Feature",
+          impl_time: "Implementation time",
+          weeks: "weeks",
+          months: "months",
+          table_customizable: "Customizable",
+          table_custom_us: "Open APIs + flexible configuration",
+          table_custom_ign: "Partial (modules)",
+          table_custom_prop: "Requires consulting",
+          // Advantages
+          adv_speed: "🚀 Speed",
+          adv_speed_desc: "Implementation in days, not months. Modern stack your IT team already knows (Python, React, Docker).",
+          adv_ai: "💡 Integrated AI",
+          adv_ai_desc: "Only one in the market with conversational agent querying the historian in natural language.",
+          adv_cost: "💰 No hidden costs",
+          adv_cost_desc: "Historian, alarms, reports, WebSockets and API included. No per-tag licenses.",
+          adv_lock: "� Customizable",
+          adv_lock_desc: "Open APIs and flexible configuration. Adaptable to your processes without depending on external consultants.",
+          adv_multi: "🌐 Multi-vendor",
+          adv_multi_desc: "Siemens, Rockwell, Beckhoff and any PLC with OPC UA. No extra adapters.",
+          adv_modern: "📱 Modern",
+          adv_modern_desc: "Responsive interface, mobile-ready. No ActiveX or obsolete plugins.",
+          // Demo section
+          chip_action: "See it in action",
+          demo_title: "System demo",
+          demo_desc: "Complete navigation through all screens with simulated data from a chemical reactor: real-time monitoring, alarms, reports and the AI conversational agent.",
+          demo_youtube: "Watch demo on YouTube",
+          demo_youtube_sub: "Complete system walkthrough",
+          cta_schedule: "Schedule presentation",
+          cta_proposal: "Request proposal",
+          // Pricing section
+          chip_flexible: "Flexible model",
+          pricing_title: "Transparent licensing",
+          tier_starter_desc: "Ideal for small plants or pilot projects.",
+          tier_5k_vars: "✓ Up to 5,000 variables",
+          tier_1_server: "✓ 1 server",
+          tier_historian: "✓ Historian included",
+          tier_email: "✓ Email notifications",
+          tier_reports_basic: "✓ Basic reports",
+          tier_support_email: "✓ Email support",
+          tier_pro_desc: "For medium plants with complete needs.",
+          tier_25k_vars: "✓ Up to 25,000 variables",
+          tier_historian_alarms: "✓ Historian + Alarm engine",
+          tier_email_telegram: "✓ Email + Telegram",
+          tier_reports_full: "✓ PDF/Excel reports",
+          tier_ai: "✓ AI Agent included",
+          tier_support_priority: "✓ Priority support",
+          tier_ent_desc: "For multi-plant or critical operations.",
+          tier_unlimited: "✓ Unlimited variables",
+          tier_ha: "✓ High availability",
+          tier_custom: "✓ Custom integrations",
+          tier_multi: "✓ Multi-plant",
+          tier_sla: "✓ SLA 24/7",
+          tier_training: "✓ Training included",
+          pricing_footer: "All plans include: InfluxDB Historian, Alarm engine, 3 WebSockets, REST API, i18n ES/EN. No per-tag licenses. No hidden costs.",
+          // CTA
+          cta_title: "Ready to modernize your plant?",
+          cta_desc: "Schedule a personalized presentation where we'll show how Smart Industrial Hub can solve your operation's specific challenges.",
+          // Footer
+          footer: "Smart Industrial Hub v2.3 · Intelligent Industrial Platform · 2025"
+        }
+      };
+
+      let currentLang = 'es';
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        document.documentElement.lang = lang;
+        const dict = translations[lang];
+        
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (dict[key]) {
+            el.textContent = dict[key];
+          }
+        });
+        
+        // Update button text
+        const btn = document.getElementById('langToggle');
+        btn.textContent = lang === 'es' ? 'EN' : 'ES';
+        btn.title = lang === 'es' ? 'Switch to English' : 'Cambiar a Español';
+      }
+
+      document.getElementById('langToggle').addEventListener('click', () => {
+        setLanguage(currentLang === 'es' ? 'en' : 'es');
+      });
+    </script>
+  </body>
+</html>
