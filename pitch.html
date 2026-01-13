@@ -1,12 +1,12 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Smart Industrial Hub - Pitch Comercial</title>
+    <title>Smart Industrial Hub - Evaluación interna</title>
     <meta
       name="description"
-      content="Pitch comercial: Smart Industrial Hub - Plataforma industrial moderna vs soluciones legacy. OPC UA, historian, alarmas, reportes y AI."
+      content="Documento interno de evaluación técnica de Smart Industrial Hub: comparativa vs soluciones legacy y análisis de costes."
     />
     <style>
       :root {
@@ -361,8 +361,7 @@
             <a href="#comparativa" data-i18n="nav_compare">vs Competencia</a>
             <a href="#platform" data-i18n="nav_platform">Plataforma</a>
             <a href="#modules" data-i18n="nav_modules">Módulos</a>
-            <a href="#demo">Demo</a>
-            <a href="#pricing" data-i18n="nav_pricing">Modelo</a>
+            <a href="#pricing" data-i18n="nav_pricing">Comparativa costes</a>
             <button id="langToggle" class="lang-btn" title="Switch language">EN</button>
           </nav>
         </div>
@@ -374,13 +373,13 @@
           <div class="reveal">
             <h1>Smart Industrial Hub</h1>
             <p data-i18n="hero_desc">
-              La alternativa moderna a los SCADA legacy. Plataforma industrial de nueva generación
-              que unifica OPC UA, historian, alarmas inteligentes, reportes y AI en una sola solución.
-              Sin licencias por tag. Sin costos ocultos. Sin vendor lock-in.
+              Documento interno de evaluación técnica para valorar la adopción de Smart Industrial Hub
+              como plataforma interna. Objetivo: comprobar viabilidad técnica, ahorro en costes de licencias,
+              reducción de dependencia de vendors y la capacidad de soportar cargas productivas.
             </p>
             <div class="hero-cta">
               <a class="btn primary" href="#demo" data-i18n="hero_cta_demo">Ver demo</a>
-              <a class="btn secondary" href="#comparativa" data-i18n="hero_cta_why">¿Por qué elegirnos?</a>
+              <a class="btn secondary" href="#comparativa" data-i18n="hero_cta_why">Objetivo de la evaluación</a>
             </div>
           </div>
           <div class="hero-card reveal">
@@ -450,11 +449,11 @@
             <p class="reveal" data-i18n="solution_desc">
               Una plataforma unificada que combina lo mejor de SCADA, Historian, gestión de alarmas,
               reportes de producción y AI en una sola solución. Stack tecnológico moderno, 
-              arquitectura escalable, y modelo de negocio transparente.
+              arquitectura escalable, y control total interno.
             </p>
             <div class="timeline">
               <div class="step reveal"><span>✓</span><div><strong data-i18n="sol_all_title">Todo incluido</strong> - <span data-i18n="sol_all_desc">SCADA + Historian + Alarmas + Reportes + AI en un paquete.</span></div></div>
-              <div class="step reveal"><span>✓</span><div><strong data-i18n="sol_price_title">Precio transparente</strong> - <span data-i18n="sol_price_desc">Sin licencias por tag, sin costos ocultos.</span></div></div>
+              <div class="step reveal"><span>✓</span><div><strong data-i18n="sol_price_title">Ahorro en licencias</strong> - <span data-i18n="sol_price_desc">Sin coste por tag, sin licencias recurrentes de terceros.</span></div></div>
               <div class="step reveal"><span>✓</span><div><strong data-i18n="sol_stack_title">Stack moderno</strong> - <span data-i18n="sol_stack_desc">APIs REST, WebSockets, React, Python, Docker.</span></div></div>
               <div class="step reveal"><span>✓</span><div><strong>Multi-vendor</strong> - <span data-i18n="sol_multi_desc">Siemens, Rockwell, Beckhoff, cualquier OPC UA.</span></div></div>
               <div class="step reveal"><span>✓</span><div><strong data-i18n="sol_custom_title">Personalizable</strong> - <span data-i18n="sol_custom_desc">Adaptable a tus procesos, sin dependencia de consultores externos.</span></div></div>
@@ -482,33 +481,33 @@
                 </tr>
               </thead>
               <tbody>
-                <tr style="border-bottom: 1px solid var(--line); background: rgba(240,139,37,0.08);">
-                  <td style="padding: 14px;"><strong>💰 Licencia base</strong></td>
-                  <td style="padding: 14px; text-align: center; color: var(--accent); font-weight: 600;">Consultar</td>
-                  <td style="padding: 14px; text-align: center; color: #c00; font-weight: 600;">$15,000 - $50,000</td>
-                  <td style="padding: 14px; text-align: center; color: #c00; font-weight: 600;">$50,000 - $200,000+</td>
-                  <td style="padding: 14px; text-align: center; color: #c00; font-weight: 600;">$30,000 - $100,000+</td>
+                <tr style="border-bottom: 1px solid var(--line); background: rgba(240,139,37,0.03);">
+                  <td style="padding: 14px;"><strong>💰 Licencia base (estimada)</strong></td>
+                  <td style="padding: 14px; text-align: center; color: var(--accent); font-weight: 600;">Bajo (estimado)</td>
+                  <td style="padding: 14px; text-align: center;">Medio</td>
+                  <td style="padding: 14px; text-align: center;">Alto</td>
+                  <td style="padding: 14px; text-align: center;">Alto</td>
                 </tr>
-                <tr style="border-bottom: 1px solid var(--line); background: rgba(240,139,37,0.08);">
+                <tr style="border-bottom: 1px solid var(--line); background: rgba(240,139,37,0.03);">
                   <td style="padding: 14px;"><strong>💰 Costo por tag</strong></td>
-                  <td style="padding: 14px; text-align: center; color: var(--accent); font-weight: 600;">$0 (ilimitado)</td>
-                  <td style="padding: 14px; text-align: center;">Incluido en licencia</td>
-                  <td style="padding: 14px; text-align: center; color: #c00;">$10 - $25 por tag</td>
-                  <td style="padding: 14px; text-align: center; color: #c00;">$5 - $15 por tag</td>
+                  <td style="padding: 14px; text-align: center; color: var(--accent); font-weight: 600;">No aplica (licencia sin tags)</td>
+                  <td style="padding: 14px; text-align: center;">Incluido / variable</td>
+                  <td style="padding: 14px; text-align: center;">Posible coste por tag</td>
+                  <td style="padding: 14px; text-align: center;">Posible coste por tag</td>
                 </tr>
-                <tr style="border-bottom: 1px solid var(--line); background: rgba(240,139,37,0.08);">
+                <tr style="border-bottom: 1px solid var(--line); background: rgba(240,139,37,0.03);">
                   <td style="padding: 14px;"><strong>💰 Mantenimiento anual</strong></td>
-                  <td style="padding: 14px; text-align: center; color: var(--accent); font-weight: 600;">Incluido</td>
-                  <td style="padding: 14px; text-align: center; color: #c00;">18-22% del coste licencia</td>
-                  <td style="padding: 14px; text-align: center; color: #c00;">20-25% del coste licencia</td>
-                  <td style="padding: 14px; text-align: center; color: #c00;">18-22% del coste licencia</td>
+                  <td style="padding: 14px; text-align: center;">Incluido / Bajo</td>
+                  <td style="padding: 14px; text-align: center;">~18-22% licencia</td>
+                  <td style="padding: 14px; text-align: center;">~20-25% licencia</td>
+                  <td style="padding: 14px; text-align: center;">~18-22% licencia</td>
                 </tr>
-                <tr style="border-bottom: 1px solid var(--line); background: rgba(240,139,37,0.08);">
+                <tr style="border-bottom: 1px solid var(--line); background: rgba(240,139,37,0.03);">
                   <td style="padding: 14px;"><strong>💰 Historian adicional</strong></td>
                   <td style="padding: 14px; text-align: center; color: var(--accent); font-weight: 600;">Incluido (InfluxDB)</td>
-                  <td style="padding: 14px; text-align: center;">Incluido</td>
-                  <td style="padding: 14px; text-align: center; color: #c00;">$20,000 - $80,000 extra</td>
-                  <td style="padding: 14px; text-align: center; color: #c00;">$15,000 - $50,000 extra</td>
+                  <td style="padding: 14px; text-align: center;">Incluido / Medio</td>
+                  <td style="padding: 14px; text-align: center;">Requiere componente extra</td>
+                  <td style="padding: 14px; text-align: center;">Requiere componente extra</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--line);">
                   <td style="padding: 14px;"><strong>AI/ML integrado</strong></td>
@@ -584,26 +583,27 @@
             </table>
           </div>
 
-          <!-- Resumen de costos -->
-          <div class="card reveal" style="background: linear-gradient(135deg, rgba(240,139,37,0.1) 0%, rgba(15,163,163,0.1) 100%); border: 2px solid var(--accent); margin-bottom: 30px;">
-            <h3 style="text-align: center; margin-bottom: 16px;">💡 Ejemplo: Planta con 10,000 tags</h3>
+          <!-- Resumen de costes (evaluación interna) -->
+          <div class="card reveal" style="background: linear-gradient(135deg, rgba(240,139,37,0.04) 0%, rgba(15,163,163,0.04) 100%); border: 1px solid var(--line); margin-bottom: 24px;">
+            <h3 style="text-align: center; margin-bottom: 12px;" data-i18n="costs_example_title">💡 Resumen estimado: Planta con 10,000 tags</h3>
             <div class="grid-3" style="gap: 20px;">
               <div style="text-align: center;">
                 <p style="font-size: 0.9rem; color: var(--muted);">AVEVA / Wonderware</p>
-                <p style="font-size: 1.5rem; font-weight: 700; color: #c00;">$80,000 - $150,000</p>
-                <p style="font-size: 0.8rem; color: var(--muted);">+ Historian + Mantenimiento anual</p>
+                <p style="font-size: 1.2rem; font-weight: 700; color: #c00;">Alto</p>
+                <p style="font-size: 0.8rem; color: var(--muted);">Licencias + Historian + Mantenimiento + Integración</p>
               </div>
               <div style="text-align: center;">
                 <p style="font-size: 0.9rem; color: var(--muted);">Ignition</p>
-                <p style="font-size: 1.5rem; font-weight: 700; color: #c00;">$25,000 - $50,000</p>
-                <p style="font-size: 0.8rem; color: var(--muted);">+ Módulos adicionales</p>
+                <p style="font-size: 1.2rem; font-weight: 700; color: #c00;">Medio</p>
+                <p style="font-size: 0.8rem; color: var(--muted);">Licencia base + módulos extra + mantenimiento</p>
               </div>
               <div style="text-align: center;">
                 <p style="font-size: 0.9rem; color: var(--muted);">Smart Industrial Hub</p>
-                <p style="font-size: 1.5rem; font-weight: 700; color: var(--accent);">Consultar</p>
-                <p style="font-size: 0.8rem; color: var(--muted);">Todo incluido, sin sorpresas</p>
+                <p style="font-size: 1.2rem; font-weight: 700; color: var(--accent);">Bajo (estimado)</p>
+                <p style="font-size: 0.8rem; color: var(--muted);">Historian + Alarmas + API incluidos; menores costes recurrentes</p>
               </div>
             </div>
+            <p style="text-align:center; margin-top:12px; color:var(--muted); font-size:0.85rem;" data-i18n="costs_note">Nota: cifras cualitativas orientativas para evaluación interna (licencias, mantenimiento e integración).</p>
           </div>
 
           <!-- Ventajas clave -->
@@ -778,8 +778,7 @@
               <div style="font-size: 0.85rem; opacity: 0.8; margin-top: 6px;" data-i18n="demo_youtube_sub">Navegación completa del sistema</div>
             </a>
             <div class="hero-cta">
-              <a class="btn primary" href="mailto:paul.alexander.pg@gmail.com" data-i18n="cta_schedule">Agendar presentación</a>
-              <a class="btn secondary" href="mailto:paul.alexander.pg@gmail.com" data-i18n="cta_proposal">Solicitar propuesta</a>
+              <a class="btn primary" href="mailto:infra-team@company.local" data-i18n="cta_propose_pilot">Proponer piloto</a>
             </div>
           </div>
         </section>
@@ -836,19 +835,19 @@
         <!-- CTA FINAL -->
         <section>
           <div class="cta reveal" style="text-align: center;">
-            <h2 style="font-family: Georgia, serif; font-size: 1.8rem; margin-bottom: 10px;" data-i18n="cta_title">¿Listo para modernizar tu planta?</h2>
+            <h2 style="font-family: Georgia, serif; font-size: 1.8rem; margin-bottom: 10px;" data-i18n="cta_title">Siguiente paso: evaluar piloto interno</h2>
             <p style="max-width: 600px; margin: 0 auto 20px;" data-i18n="cta_desc">
-              Agenda una presentación personalizada donde mostraremos cómo Smart Industrial Hub
-              puede resolver los desafíos específicos de tu operación.
+              Si propones el piloto, definiremos alcance y recursos. Si el piloto valida los criterios técnicos,
+              la expansión y modelo económico se evaluarán por separado.
             </p>
             <div class="hero-cta" style="justify-content: center;">
-              <a class="btn primary" href="mailto:paul.alexander.pg@gmail.com" data-i18n="cta_schedule">Agendar presentación</a>
+              <a class="btn primary" href="mailto:infra-team@company.local" data-i18n="cta_propose_pilot">Proponer piloto</a>
             </div>
           </div>
         </section>
       </main>
 
-      <footer data-i18n="footer">Smart Industrial Hub v2.3 · Plataforma Industrial Inteligente · 2025</footer>
+      <footer data-i18n="footer">Smart Industrial Hub v2.3 · Evaluación interna · 2025</footer>
     </div>
 
     <script>
@@ -876,11 +875,13 @@
           nav_compare: "vs Competencia",
           nav_platform: "Plataforma",
           nav_modules: "Módulos",
-          nav_pricing: "Modelo",
+          nav_demo: "Demo",
+          nav_pilot: "Piloto",
+          nav_pricing: "Comparativa costes",
           // Hero
-          hero_desc: "La alternativa moderna a los SCADA legacy. Plataforma industrial de nueva generación que unifica OPC UA, historian, alarmas inteligentes, reportes y AI en una sola solución. Sin licencias por tag. Sin costos ocultos. Sin vendor lock-in.",
-          hero_cta_demo: "Ver demo",
-          hero_cta_why: "¿Por qué elegirnos?",
+          hero_desc: "Documento interno de evaluación técnica para valorar la adopción de Smart Industrial Hub como plataforma interna. Objetivo: comprobar viabilidad técnica, ahorro en costes de licencias, reducción de dependencia de vendors y la capacidad de soportar cargas productivas.",
+          hero_cta_demo: "Ver demo (evaluación interna)",
+          hero_cta_why: "Objetivo de la evaluación",
           hero_capabilities: "Capacidades clave",
           hero_variables: "Variables @ 1Hz",
           hero_agent: "Agente integrado",
@@ -902,11 +903,11 @@
           // Solution section
           chip_proposal: "Nuestra propuesta",
           solution_title: "Smart Industrial Hub: La solución moderna",
-          solution_desc: "Una plataforma unificada que combina lo mejor de SCADA, Historian, gestión de alarmas, reportes de producción y AI en una sola solución. Stack tecnológico moderno, arquitectura escalable, y modelo de negocio transparente.",
+          solution_desc: "Una plataforma unificada que combina lo mejor de SCADA, Historian, gestión de alarmas, reportes de producción y AI en una sola solución. Stack tecnológico moderno, arquitectura escalable y control total interno.",
           sol_all_title: "Todo incluido",
           sol_all_desc: "SCADA + Historian + Alarmas + Reportes + AI en un paquete.",
-          sol_price_title: "Precio transparente",
-          sol_price_desc: "Sin licencias por tag, sin costos ocultos.",
+          sol_price_title: "Ahorro en licencias",
+          sol_price_desc: "Sin coste por tag, sin licencias recurrentes de terceros.",
           sol_stack_title: "Stack moderno",
           sol_stack_desc: "APIs REST, WebSockets, React, Python, Docker.",
           sol_multi_desc: "Siemens, Rockwell, Beckhoff, cualquier OPC UA.",
@@ -930,7 +931,7 @@
           adv_ai_desc: "Único en el mercado con agente conversacional que consulta el historian en lenguaje natural.",
           adv_cost: "💰 Sin costos ocultos",
           adv_cost_desc: "Historian, alarmas, reportes, WebSockets y API incluidos. Sin licencias por tag.",
-          adv_lock: "� Personalizable",
+          adv_lock: "🔧 Personalizable",
           adv_lock_desc: "APIs abiertas y configuración flexible. Adaptable a tus procesos sin depender de consultores externos.",
           adv_multi: "🌐 Multi-vendor",
           adv_multi_desc: "Siemens, Rockwell, Beckhoff y cualquier PLC con OPC UA. Sin adaptadores extra.",
@@ -944,9 +945,10 @@
           demo_youtube_sub: "Navegación completa del sistema",
           cta_schedule: "Agendar presentación",
           cta_proposal: "Solicitar propuesta",
+          cta_propose_pilot: "Proponer piloto",
           // Pricing section
-          chip_flexible: "Modelo flexible",
-          pricing_title: "Licenciamiento transparente",
+          chip_flexible: "Comparativa",
+          pricing_title: "Comparativa de costes",
           tier_starter_desc: "Ideal para plantas pequeñas o proyectos piloto.",
           tier_5k_vars: "✓ Hasta 5,000 variables",
           tier_1_server: "✓ 1 servidor",
@@ -968,12 +970,28 @@
           tier_multi: "✓ Multi-planta",
           tier_sla: "✓ SLA 24/7",
           tier_training: "✓ Capacitación incluida",
-          pricing_footer: "Todos los planes incluyen: Historian InfluxDB, Motor de alarmas, 3 WebSockets, API REST, i18n ES/EN. Sin licencias por tag. Sin costos ocultos.",
+          pricing_footer: "Estimaciones internas de coste: licencias, mantenimiento e integración. Estas cifras son orientativas y no representan precios de venta.",
+          // Cost & Pilot
+          costs_example_title: "💡 Resumen estimado: Planta con 10,000 tags",
+          costs_note: "Nota: cifras cualitativas orientativas para evaluación interna (licencias, mantenimiento e integración).",
+          chip_pilot: "Piloto",
+          pilot_title: "Propuesta de piloto interno",
+          pilot_desc: "Propuesta de prueba para validar Smart Industrial Hub en un entorno controlado: medir rendimiento, integración OPC UA, ingestión en historian, motor de alarmas y generación de reportes.",
+          pilot_scope_title: "Alcance",
+          pilot_scope: "Conectar 1 línea/proceso (≈10k tags), validar ingest 1Hz, alarmas y reportes.",
+          pilot_duration_title: "Duración",
+          pilot_duration: "8 - 12 semanas",
+          pilot_team_title: "Equipo",
+          pilot_team: "2 desarrolladores, 1 ingeniero de control, 1 sysadmin/infra",
+          pilot_success_title: "Criterios de éxito",
+          pilot_success: "Integración estable OPC UA, ingest de ≥10k tags a 1Hz, alarmas operativas, reportes automáticos y documentación de despliegue.",
+          pilot_deliver_title: "Entregables",
+          pilot_deliver: "Despliegue en infra de pruebas, runbook, informe técnico y comparación de costes.",
           // CTA
-          cta_title: "¿Listo para modernizar tu planta?",
-          cta_desc: "Agenda una presentación personalizada donde mostraremos cómo Smart Industrial Hub puede resolver los desafíos específicos de tu operación.",
+          cta_title: "Siguiente paso: evaluar piloto interno",
+          cta_desc: "Si propones el piloto, definiremos alcance y recursos. Si el piloto valida los criterios técnicos, la expansión y modelo económico se evaluarán por separado.",
           // Footer
-          footer: "Smart Industrial Hub v2.3 · Plataforma Industrial Inteligente · 2025"
+          footer: "Smart Industrial Hub v2.3 · Evaluación interna · 2025"
         },
         en: {
           // Nav
@@ -982,11 +1000,13 @@
           nav_compare: "vs Competition",
           nav_platform: "Platform",
           nav_modules: "Modules",
-          nav_pricing: "Pricing",
+          nav_demo: "Demo",
+          nav_pilot: "Pilot",
+          nav_pricing: "Cost comparison",
           // Hero
-          hero_desc: "The modern alternative to legacy SCADA. Next-generation industrial platform that unifies OPC UA, historian, smart alarms, reports and AI in a single solution. No per-tag licenses. No hidden costs. No vendor lock-in.",
-          hero_cta_demo: "Watch demo",
-          hero_cta_why: "Why choose us?",
+          hero_desc: "Internal evaluation document to assess adopting Smart Industrial Hub as an internal platform. Objective: validate technical viability, licensing cost savings, reduction of vendor dependency and the ability to support production workloads.",
+          hero_cta_demo: "Watch internal demo",
+          hero_cta_why: "Evaluation objective",
           hero_capabilities: "Key capabilities",
           hero_variables: "Variables @ 1Hz",
           hero_agent: "Integrated agent",
@@ -1008,11 +1028,11 @@
           // Solution section
           chip_proposal: "Our proposal",
           solution_title: "Smart Industrial Hub: The modern solution",
-          solution_desc: "A unified platform combining the best of SCADA, Historian, alarm management, production reports and AI in a single solution. Modern tech stack, scalable architecture, and transparent business model.",
+          solution_desc: "A unified platform combining the best of SCADA, Historian, alarm management, production reports and AI in a single solution. Modern tech stack, scalable architecture, and full internal control.",
           sol_all_title: "All-inclusive",
           sol_all_desc: "SCADA + Historian + Alarms + Reports + AI in one package.",
-          sol_price_title: "Transparent pricing",
-          sol_price_desc: "No per-tag licenses, no hidden costs.",
+          sol_price_title: "License savings",
+          sol_price_desc: "No per-tag costs, no third-party recurring licenses.",
           sol_stack_title: "Modern stack",
           sol_stack_desc: "REST APIs, WebSockets, React, Python, Docker.",
           sol_multi_desc: "Siemens, Rockwell, Beckhoff, any OPC UA.",
@@ -1051,8 +1071,8 @@
           cta_schedule: "Schedule presentation",
           cta_proposal: "Request proposal",
           // Pricing section
-          chip_flexible: "Flexible model",
-          pricing_title: "Transparent licensing",
+          chip_flexible: "Cost comparison",
+          pricing_title: "Cost comparison",
           tier_starter_desc: "Ideal for small plants or pilot projects.",
           tier_5k_vars: "✓ Up to 5,000 variables",
           tier_1_server: "✓ 1 server",
@@ -1074,12 +1094,29 @@
           tier_multi: "✓ Multi-plant",
           tier_sla: "✓ SLA 24/7",
           tier_training: "✓ Training included",
-          pricing_footer: "All plans include: InfluxDB Historian, Alarm engine, 3 WebSockets, REST API, i18n ES/EN. No per-tag licenses. No hidden costs.",
+          pricing_footer: "Internal cost estimates: licensing, maintenance and integration. Figures are indicative and not sales prices.",
+          // Cost & Pilot
+          costs_example_title: "💡 Estimated summary: Plant with 10,000 tags",
+          costs_note: "Note: qualitative indicative figures for internal evaluation (licensing, maintenance and integration).",
+          chip_pilot: "Pilot",
+          pilot_title: "Internal pilot proposal",
+          pilot_desc: "Trial proposal to validate Smart Industrial Hub in a controlled environment: measure performance, OPC UA integration, historian ingestion, alarm engine and report generation.",
+          pilot_scope_title: "Scope",
+          pilot_scope: "Connect 1 line/process (≈10k tags), validate 1Hz ingestion, alarms and reports.",
+          pilot_duration_title: "Duration",
+          pilot_duration: "8 - 12 weeks",
+          pilot_team_title: "Team",
+          pilot_team: "2 devs, 1 control engineer, 1 sysadmin/infra",
+          pilot_success_title: "Success criteria",
+          pilot_success: "Stable OPC UA integration, ingestion of ≥10k tags at 1Hz, operational alarms, automated reports and deployment documentation.",
+          pilot_deliver_title: "Deliverables",
+          pilot_deliver: "Deployment on test infra, runbook, technical report and cost comparison.",
+          cta_propose_pilot: "Propose pilot",
           // CTA
-          cta_title: "Ready to modernize your plant?",
-          cta_desc: "Schedule a personalized presentation where we'll show how Smart Industrial Hub can solve your operation's specific challenges.",
+          cta_title: "Next step: evaluate internal pilot",
+          cta_desc: "If you propose the pilot we'll define scope and resources. If the pilot validates technical criteria, any expansion and economic model will be evaluated separately.",
           // Footer
-          footer: "Smart Industrial Hub v2.3 · Intelligent Industrial Platform · 2025"
+          footer: "Smart Industrial Hub v2.3 · Internal evaluation · 2025"
         }
       };
 
