@@ -1,0 +1,1112 @@
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartHub | Plataforma Industrial Moderna</title>
+    <meta
+      name="description"
+      content="SmartHub es el cerebro industrial por encima de las HMIs: OPC UA multi-PLC, tiempo real, historian InfluxDB 3 Core a 1 Hz, alarmas avanzadas, API REST/WebSocket e IA para análisis y reportes."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0a0f14;
+        --ink-2: #111a22;
+        --muted: #60707c;
+        --line: rgba(10, 15, 20, 0.12);
+        --paper: #f5f6f4;
+        --paper-2: #eef1ee;
+        --accent: #19c1a4;
+        --accent-2: #ffb84d;
+        --accent-3: #2d8cff;
+        --shadow: 0 26px 60px rgba(10, 15, 20, 0.16);
+        --radius-lg: 28px;
+        --radius-md: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(circle at 10% 15%, rgba(45, 140, 255, 0.12), transparent 50%),
+          radial-gradient(circle at 85% 10%, rgba(25, 193, 164, 0.16), transparent 45%),
+          linear-gradient(135deg, #f7f8f6 0%, #f3f4f2 50%, #f0f2ef 100%);
+        min-height: 100vh;
+        scroll-behavior: smooth;
+      }
+
+      .skip-link {
+        position: absolute;
+        top: -48px;
+        left: 16px;
+        z-index: 50;
+        background: var(--ink);
+        color: #fff;
+        padding: 10px 14px;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: top 0.2s ease;
+      }
+
+      .skip-link:focus {
+        top: 12px;
+      }
+
+      .page {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .grain {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+        mix-blend-mode: multiply;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(12px);
+        background: rgba(245, 246, 244, 0.86);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 18px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: "Sora", sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 13px;
+      }
+
+      .brand .logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 14px;
+        background: conic-gradient(from 120deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+        box-shadow: 0 10px 20px rgba(25, 193, 164, 0.25);
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        font-size: 13px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--ink-2);
+        opacity: 0.7;
+        transition: 0.2s ease;
+      }
+
+      .nav-links a:hover {
+        opacity: 1;
+      }
+
+      .menu-toggle {
+        display: none;
+        align-items: center;
+        gap: 8px;
+        background: transparent;
+        color: var(--ink);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 12px;
+        cursor: pointer;
+      }
+
+      .lang-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--ink);
+        color: white;
+        border-radius: 999px;
+        padding: 6px 14px;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+        border: none;
+      }
+
+      a:focus-visible,
+      button:focus-visible,
+      input:focus-visible,
+      textarea:focus-visible {
+        outline: 3px solid rgba(45, 140, 255, 0.55);
+        outline-offset: 2px;
+      }
+
+      section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 80px 28px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 42px;
+        align-items: center;
+        padding-top: 90px;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Sora", sans-serif;
+        color: var(--ink);
+      }
+
+      h1 {
+        font-size: clamp(2.6rem, 4vw, 4.1rem);
+        line-height: 1.05;
+        margin-bottom: 18px;
+      }
+
+      .hero p {
+        font-size: 1.05rem;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+
+      .hero-cta {
+        margin-top: 28px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .btn {
+        padding: 14px 22px;
+        border-radius: 16px;
+        border: 1px solid transparent;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        cursor: pointer;
+        text-decoration: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .btn.primary {
+        background: var(--ink);
+        color: white;
+        box-shadow: 0 16px 30px rgba(11, 17, 22, 0.2);
+      }
+
+      .btn.secondary {
+        background: transparent;
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .hero-card {
+        background: rgba(255, 255, 255, 0.75);
+        border-radius: var(--radius-lg);
+        padding: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        box-shadow: var(--shadow);
+        display: grid;
+        gap: 16px;
+      }
+
+      .hero-card img {
+        width: min(100%, 640px);
+        aspect-ratio: 1904 / 935;
+        object-fit: cover;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        box-shadow: 0 16px 32px rgba(10, 15, 20, 0.15);
+        margin: 0 auto;
+        justify-self: center;
+        image-rendering: auto;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 12px;
+      }
+
+      .metric {
+        padding: 12px;
+        border-radius: 14px;
+        background: white;
+        border: 1px solid var(--line);
+        font-size: 0.9rem;
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 1.15rem;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 26px;
+      }
+
+      .chip {
+        background: rgba(25, 193, 164, 0.14);
+        color: #0c6b5a;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        background: white;
+        border-radius: var(--radius-md);
+        padding: 22px;
+        border: 1px solid var(--line);
+        box-shadow: 0 16px 28px rgba(10, 15, 20, 0.08);
+        display: grid;
+        gap: 10px;
+      }
+
+      .card p {
+        color: var(--muted);
+        line-height: 1.5;
+        font-size: 0.95rem;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        align-items: center;
+      }
+      .diagram {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: var(--radius-lg);
+        padding: 24px;
+        border: 1px solid var(--line);
+        display: grid;
+        gap: 18px;
+      }
+
+      .diagram-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px;
+        align-items: center;
+      }
+
+      .pill {
+        padding: 10px 12px;
+        border-radius: 999px;
+        background: rgba(45, 140, 255, 0.12);
+        color: #1f4d7a;
+        font-size: 12px;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      .arrow {
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(10, 15, 20, 0.4), transparent);
+      }
+
+      .sector {
+        display: grid;
+        gap: 10px;
+        padding: 18px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid var(--line);
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 18px;
+      }
+
+      .gallery figure {
+        background: white;
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        box-shadow: 0 16px 28px rgba(10, 15, 20, 0.08);
+      }
+
+      .gallery img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .gallery figcaption {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .roadmap {
+        display: grid;
+        gap: 14px;
+      }
+
+      .step {
+        display: grid;
+        gap: 6px;
+        padding: 16px 18px;
+        border-radius: 16px;
+        background: rgba(10, 15, 20, 0.04);
+      }
+
+      .cta {
+        background: linear-gradient(120deg, rgba(25, 193, 164, 0.18), rgba(255, 184, 77, 0.2));
+        border-radius: 32px;
+        padding: 36px;
+        border: 1px solid rgba(10, 15, 20, 0.08);
+        display: grid;
+        gap: 18px;
+      }
+
+      .copy-feedback {
+        min-height: 20px;
+        color: #0c6b5a;
+        font-size: 0.92rem;
+        font-weight: 500;
+      }
+
+      footer {
+        padding: 40px 28px 60px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      .footer-links {
+        margin-top: 12px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .footer-links a {
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: all 0.7s ease;
+      }
+
+      .reveal.reveal-in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 720px) {
+        .nav {
+          align-items: flex-start;
+        }
+
+        .menu-toggle {
+          display: inline-flex;
+        }
+
+        .nav-links {
+          display: none;
+          width: 100%;
+          flex-direction: column;
+          gap: 10px;
+          padding-top: 6px;
+        }
+
+        .nav-links.open {
+          display: flex;
+        }
+
+        .hero {
+          padding-top: 60px;
+        }
+
+        .gallery img {
+          height: 160px;
+        }
+
+        .card,
+        .gallery figure {
+          box-shadow: 0 10px 20px rgba(10, 15, 20, 0.07);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="a11y.skip">Saltar al contenido</a>
+    <div class="page">
+      <div class="grain"></div>
+      <header>
+        <div class="nav">
+          <div class="brand">
+            <div class="logo"></div>
+            SmartHub
+          </div>
+          <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav" data-i18n="nav.menu">
+            Menú
+          </button>
+          <nav class="nav-links" id="mainNav">
+            <a href="#problem" data-i18n="nav.problem">Problema</a>
+            <a href="#features" data-i18n="nav.features">Features</a>
+            <a href="#architecture" data-i18n="nav.architecture">Arquitectura</a>
+            <a href="#sectors" data-i18n="nav.sectors">Sectores</a>
+            <a href="#gallery" data-i18n="nav.gallery">Screens</a>
+            <a href="#roadmap" data-i18n="nav.roadmap">Roadmap</a>
+            <a href="#contact" data-i18n="nav.contact">Contacto</a>
+          </nav>
+          <button class="lang-toggle" id="langToggle" aria-label="Cambiar idioma" aria-pressed="false">EN</button>
+        </div>
+      </header>
+
+      <main id="main">
+        <section class="hero">
+          <div class="reveal">
+            <h1 data-i18n="hero.title">SmartHub. El cerebro industrial por encima de las HMIs.</h1>
+            <p data-i18n="hero.subtitle">
+              Plataforma industrial moderna (no es un HMI) que conecta PLCs por OPC UA, monitoriza en tiempo real,
+              historiza cada segundo en InfluxDB 3 Core, gestiona alarmas avanzadas y aplica IA para análisis, reportes y mantenimiento.
+            </p>
+            <div class="hero-cta">
+              <a class="btn primary" href="#gallery" data-i18n="hero.ctaPrimary">Ver demo</a>
+              <a class="btn secondary" href="#contact" data-i18n="hero.ctaSecondary">Contactar</a>
+            </div>
+          </div>
+          <div class="hero-card reveal">
+            <picture>
+              <source srcset="images/main-640.png 640w, images/main-1280.png 1280w" sizes="(max-width: 720px) 92vw, 640px" type="image/png" />
+              <img
+                src="images/main-640.png"
+                srcset="images/main-640.png 1x, images/main-1280.png 2x"
+                alt="Vista principal de SmartHub"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+                width="640"
+                height="314"
+              />
+            </picture>
+            <div class="metrics">
+              <div class="metric">
+                <strong>~60.000</strong>
+                <span data-i18n="hero.metric1">Variables preparadas</span>
+              </div>
+              <div class="metric">
+                <strong>1 Hz</strong>
+                <span data-i18n="hero.metric2">Histórico continuo</span>
+              </div>
+              <div class="metric">
+                <strong>OPC UA</strong>
+                <span data-i18n="hero.metric3">Multi-PLC multimarca</span>
+              </div>
+              <div class="metric">
+                <strong>WS + REST</strong>
+                <span data-i18n="hero.metric4">Tiempo real + APIs</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="problem">
+          <div class="section-title">
+            <span class="chip" data-i18n="problem.tag">Problema · Solución</span>
+            <h2 data-i18n="problem.title">Más allá del SCADA tradicional</h2>
+          </div>
+          <div class="split">
+            <div class="reveal">
+              <p data-i18n="problem.copy">
+                Los SCADA clásicos son excelentes para supervisión, pero no están diseñados para historización granular,
+                correlación de alarmas, APIs modernas o análisis inteligente. SmartHub se sitúa por encima de las HMIs
+                para unir datos, alarmas, informes y conocimiento operativo en un solo flujo.
+              </p>
+            </div>
+            <div class="grid-3 reveal" id="problemCards"></div>
+          </div>
+        </section>
+
+        <section id="features">
+          <div class="section-title">
+            <span class="chip" data-i18n="features.tag">Features clave</span>
+            <h2 data-i18n="features.title">Todo lo que necesitas para una operación digital</h2>
+          </div>
+          <div class="grid-3" id="featureCards"></div>
+        </section>
+
+        <section id="architecture">
+          <div class="section-title">
+            <span class="chip" data-i18n="architecture.tag">Arquitectura</span>
+            <h2 data-i18n="architecture.title">Servicios escalables y desacoplados</h2>
+          </div>
+          <div class="split">
+            <div class="diagram reveal">
+              <div class="diagram-row">
+                <div class="pill">OPC UA Bridge</div>
+                <div class="arrow"></div>
+                <div class="pill">Event Bus</div>
+                <div class="arrow"></div>
+                <div class="pill">Alarm Engine</div>
+              </div>
+              <div class="diagram-row">
+                <div class="pill">Historian InfluxDB 3 Core</div>
+                <div class="arrow"></div>
+                <div class="pill">REST + WebSocket</div>
+                <div class="arrow"></div>
+                <div class="pill">SmartHub UI</div>
+              </div>
+              <div class="diagram-row">
+                <div class="pill">AI + Reports</div>
+                <div class="arrow"></div>
+                <div class="pill">Postgres + Redis</div>
+                <div class="arrow"></div>
+                <div class="pill">Integraciones ERP/MES</div>
+              </div>
+            </div>
+            <div class="reveal">
+              <p data-i18n="architecture.copy">
+                Arquitectura por servicios con pipeline industrial: OPC UA bridge → bus → motor de alarmas → historian → UI.
+                Diseñado para alta disponibilidad, despliegue por módulos y escalado horizontal cuando crece el volumen de variables.
+              </p>
+              <div class="grid-3" id="architectureCards"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="sectors">
+          <div class="section-title">
+            <span class="chip" data-i18n="sectors.tag">Casos de uso</span>
+            <h2 data-i18n="sectors.title">Industria preparada</h2>
+          </div>
+          <div class="grid-3" id="sectorCards"></div>
+        </section>
+
+        <section id="gallery">
+          <div class="section-title">
+            <span class="chip" data-i18n="gallery.tag">Galería</span>
+            <h2 data-i18n="gallery.title">Pantallas y flujos reales</h2>
+          </div>
+          <div class="gallery" id="galleryGrid"></div>
+        </section>
+
+        <section id="roadmap">
+          <div class="section-title">
+            <span class="chip" data-i18n="roadmap.tag">Roadmap</span>
+            <h2 data-i18n="roadmap.title">De MVP a entorno productivo</h2>
+          </div>
+          <div class="roadmap" id="roadmapItems"></div>
+        </section>
+
+        <section id="contact">
+          <div class="section-title">
+            <span class="chip" data-i18n="contact.tag">CTA final</span>
+            <h2 data-i18n="contact.title">¿Listo para conectar tu planta?</h2>
+          </div>
+          <div class="cta">
+            <p data-i18n="contact.copy">
+              Comparte tu caso de uso. Te ayudamos a definir el alcance, pilotos y despliegue en producción.
+            </p>
+            <div class="hero-cta">
+              <a class="btn primary" href="mailto:paul.alexander.pg@gmail.com" data-i18n="contact.ctaPrimary">Contactar</a>
+              <button class="btn secondary" id="copyEmailBtn" type="button" data-i18n="contact.copyEmail">
+                Copiar email
+              </button>
+            </div>
+            <p class="copy-feedback" id="copyFeedback" aria-live="polite"></p>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div data-i18n="footer.copy">SmartHub · Plataforma Industrial Inteligente · 2026</div>
+        <div class="footer-links">
+          <a id="footerGithub" href="" data-i18n="footer.github">GitHub</a>
+          <a id="footerLinkedin" href="" data-i18n="footer.linkedin">LinkedIn</a>
+          <a id="footerYoutube" href="" data-i18n="footer.youtube">YouTube</a>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const data = {
+        es: {
+          a11y: {
+            skip: "Saltar al contenido",
+          },
+          nav: {
+            menu: "Menú",
+            problem: "Problema",
+            features: "Features",
+            architecture: "Arquitectura",
+            sectors: "Sectores",
+            gallery: "Screens",
+            roadmap: "Roadmap",
+            contact: "Contacto",
+          },
+          hero: {
+            title: "SmartHub. El cerebro industrial por encima de las HMIs.",
+            subtitle:
+              "Plataforma industrial moderna (no es un HMI) que conecta PLCs por OPC UA, monitoriza en tiempo real, historiza cada segundo en InfluxDB 3 Core, gestiona alarmas avanzadas y aplica IA para análisis, reportes y mantenimiento.",
+            ctaPrimary: "Ver demo",
+            ctaSecondary: "Contactar",
+            metric1: "Variables preparadas",
+            metric2: "Histórico continuo",
+            metric3: "Multi-PLC multimarca",
+            metric4: "Tiempo real + APIs",
+          },
+          problem: {
+            tag: "Problema · Solución",
+            title: "Más allá del SCADA tradicional",
+            copy:
+              "Los SCADA clásicos son excelentes para supervisión, pero no están diseñados para historización granular, correlación de alarmas, APIs modernas o análisis inteligente. SmartHub se sitúa por encima de las HMIs para unir datos, alarmas, informes y conocimiento operativo en un solo flujo.",
+            cards: [
+              {
+                title: "Unifica datos dispersos",
+                copy: "Integra PLCs, alarmas y reportes en un único contexto operativo, sin depender de pantallas aisladas.",
+              },
+              {
+                title: "Historian a 1 Hz",
+                copy: "InfluxDB 3 Core guarda cada segundo para análisis, tendencias, KPI y trazabilidad completa.",
+              },
+              {
+                title: "IA y conocimiento",
+                copy: "Modelos predictivos, detección de anomalías e informes automáticos para decisiones rápidas.",
+              },
+            ],
+          },
+          features: {
+            tag: "Features clave",
+            title: "Todo lo que necesitas para una operación digital",
+            cards: [
+              { title: "OPC UA Multi-PLC", copy: "Conecta PLCs de distintas marcas con suscripciones robustas y escalables." },
+              { title: "Histórico en InfluxDB 3 Core", copy: "Historiza a 1 Hz con retención, downsampling y consultas rápidas." },
+              { title: "Alarmas avanzadas", copy: "HH/H/L/LL, deadband, severidades, ACK y lifecycle completo." },
+              { title: "Tiempo real", copy: "WebSocket para streams en vivo, dashboards y KPIs instantáneos." },
+              { title: "IA + reportes", copy: "Analítica predictiva, anomalías e informes automáticos por turno." },
+              { title: "Escalable por servicios", copy: "Arquitectura modular que crece con tu planta y volumen de datos." },
+            ],
+          },
+          architecture: {
+            tag: "Arquitectura",
+            title: "Servicios escalables y desacoplados",
+            copy:
+              "Arquitectura por servicios con pipeline industrial: OPC UA bridge → bus → motor de alarmas → historian → UI. Diseñado para alta disponibilidad, despliegue por módulos y escalado horizontal cuando crece el volumen de variables.",
+            cards: [
+              { title: "FastAPI + Python", copy: "APIs REST, seguridad JWT y WebSocket para tiempo real." },
+              { title: "InfluxDB 3 Core + Postgres + Redis", copy: "Historian de alto rendimiento, metadata, cache y deduplicación de alarmas en memoria." },
+              { title: "React + Tailwind", copy: "Frontend SaaS industrial, responsive y accesible." },
+            ],
+          },
+          sectors: {
+            tag: "Casos de uso",
+            title: "Industria preparada",
+            cards: [
+              { title: "Farma", copy: "Trazabilidad por lote, alarmas reguladas y reportes auditables." },
+              { title: "Automoción", copy: "Monitoreo de líneas, KPIs de OEE y mantenimiento predictivo." },
+              { title: "Alimentación", copy: "Control de calidad, históricos higiénicos y alertas críticas." },
+              { title: "Packaging", copy: "Rendimiento de máquinas, conteos, paradas y análisis de causa." },
+              { title: "Energía", copy: "Consumo, eficiencia y alarmas de infraestructura crítica." },
+              { title: "Utilities", copy: "Visibilidad en tiempo real y gestión centralizada de eventos." },
+            ],
+          },
+          gallery: {
+            tag: "Galería",
+            title: "Pantallas y flujos reales",
+            images: [
+              { src: "images/monitoring.PNG", title: "Monitoring en tiempo real" },
+              { src: "images/historical.PNG", title: "Historian y tendencias" },
+              { src: "images/production.PNG", title: "Reportes de producción" },
+              { src: "images/reports.PNG", title: "Informes y analytics" },
+              { src: "images/agent.PNG", title: "Agente IA" },
+              { src: "images/main.PNG", title: "Vista general SmartHub" },
+            ],
+          },
+          roadmap: {
+            tag: "Roadmap",
+            title: "De MVP a entorno productivo",
+            items: [
+              { title: "MVP", copy: "OPC UA + real-time + historian + alarmas + dashboards core." },
+              { title: "Harden", copy: "HA, backups, edge buffering, seguridad avanzada y soporte multi-planta." },
+              { title: "Prod", copy: "Integraciones MES/ERP, analítica avanzada e IA operativa a escala." },
+            ],
+          },
+          contact: {
+            tag: "CTA final",
+            title: "¿Listo para conectar tu planta?",
+            copy: "Comparte tu caso de uso. Te ayudamos a definir el alcance, pilotos y despliegue en producción.",
+            ctaPrimary: "Contactar",
+            copyEmail: "Copiar email",
+            copied: "Email copiado ✅",
+            copyFailed: "No se pudo copiar. Usa: paul.alexander.pg@gmail.com",
+          },
+          footer: {
+            copy: "SmartHub · Plataforma Industrial Inteligente · 2026",
+            github: "GitHub",
+            linkedin: "LinkedIn",
+            youtube: "YouTube",
+          },
+        },
+        en: {
+          a11y: {
+            skip: "Skip to content",
+          },
+          nav: {
+            menu: "Menu",
+            problem: "Problem",
+            features: "Features",
+            architecture: "Architecture",
+            sectors: "Industries",
+            gallery: "Screens",
+            roadmap: "Roadmap",
+            contact: "Contact",
+          },
+          hero: {
+            title: "SmartHub. The industrial brain above HMIs.",
+            subtitle:
+              "A modern industrial platform (not an HMI) that connects PLCs via OPC UA, monitors in real time, stores 1Hz history in InfluxDB 3 Core, manages advanced alarms, and applies AI for analytics, reports, and maintenance.",
+            ctaPrimary: "View demo",
+            ctaSecondary: "Contact",
+            metric1: "Variables ready",
+            metric2: "Continuous history",
+            metric3: "Multi-brand multi-PLC",
+            metric4: "Real-time + APIs",
+          },
+          problem: {
+            tag: "Problem · Solution",
+            title: "Beyond traditional SCADA",
+            copy:
+              "Classic SCADA excels at supervision, but it was not built for granular historization, alarm correlation, modern APIs, or intelligent analysis. SmartHub sits above HMIs to unify data, alarms, reports, and operational knowledge in one flow.",
+            cards: [
+              {
+                title: "Unify scattered data",
+                copy: "Integrate PLCs, alarms, and reports in a single operational context.",
+              },
+              {
+                title: "1 Hz historian",
+                copy: "InfluxDB 3 Core stores every second for analytics, trends, KPIs, and traceability.",
+              },
+              {
+                title: "AI and knowledge",
+                copy: "Predictive insights, anomaly detection, and automated reporting for fast decisions.",
+              },
+            ],
+          },
+          features: {
+            tag: "Key features",
+            title: "Everything you need for digital operations",
+            cards: [
+              { title: "Multi-PLC OPC UA", copy: "Connect PLCs from multiple brands with robust, scalable subscriptions." },
+              { title: "InfluxDB 3 Core historian", copy: "1 Hz historization with retention, downsampling, and fast queries." },
+              { title: "Advanced alarms", copy: "HH/H/L/LL, deadband, severities, ACK, and full lifecycle." },
+              { title: "Real-time", copy: "WebSocket streams for live dashboards and instant KPIs." },
+              { title: "AI + reports", copy: "Predictive analytics, anomalies, and automated shift reports." },
+              { title: "Service scalability", copy: "Modular architecture that grows with plant volume." },
+            ],
+          },
+          architecture: {
+            tag: "Architecture",
+            title: "Scalable, decoupled services",
+            copy:
+              "Service-based industrial pipeline: OPC UA bridge → bus → alarm engine → historian → UI. Built for high availability, modular rollout, and horizontal scale when variable volume grows.",
+            cards: [
+              { title: "FastAPI + Python", copy: "REST APIs, JWT security, and WebSocket real-time streams." },
+              { title: "InfluxDB 3 Core + Postgres + Redis", copy: "High-performance historian plus metadata storage, cache, and alarm deduplication in memory." },
+              { title: "React + Tailwind", copy: "Industrial SaaS frontend, responsive and accessible." },
+            ],
+          },
+          sectors: {
+            tag: "Use cases",
+            title: "Industry ready",
+            cards: [
+              { title: "Pharma", copy: "Batch traceability, regulated alarms, and auditable reports." },
+              { title: "Automotive", copy: "Line monitoring, OEE KPIs, and predictive maintenance." },
+              { title: "Food", copy: "Quality control, hygienic history, and critical alerts." },
+              { title: "Packaging", copy: "Machine performance, counts, downtime, and root-cause analysis." },
+              { title: "Energy", copy: "Consumption efficiency and critical infrastructure alarms." },
+              { title: "Utilities", copy: "Real-time visibility and centralized event management." },
+            ],
+          },
+          gallery: {
+            tag: "Gallery",
+            title: "Real screens and flows",
+            images: [
+              { src: "images/monitoring.PNG", title: "Real-time monitoring" },
+              { src: "images/historical.PNG", title: "Historian and trends" },
+              { src: "images/production.PNG", title: "Production reports" },
+              { src: "images/reports.PNG", title: "Analytics reports" },
+              { src: "images/agent.PNG", title: "AI agent" },
+              { src: "images/main.PNG", title: "SmartHub overview" },
+            ],
+          },
+          roadmap: {
+            tag: "Roadmap",
+            title: "From MVP to production",
+            items: [
+              { title: "MVP", copy: "OPC UA + real-time + historian + alarms + core dashboards." },
+              { title: "Harden", copy: "HA, backups, edge buffering, advanced security, multi-plant." },
+              { title: "Prod", copy: "MES/ERP integrations, advanced analytics, and AI at scale." },
+            ],
+          },
+          contact: {
+            tag: "Final CTA",
+            title: "Ready to connect your plant?",
+            copy: "Share your use case. We help define scope, pilots, and production rollout.",
+            ctaPrimary: "Contact",
+            copyEmail: "Copy email",
+            copied: "Email copied ✅",
+            copyFailed: "Could not copy. Use: paul.alexander.pg@gmail.com",
+          },
+          footer: {
+            copy: "SmartHub · Intelligent Industrial Platform · 2026",
+            github: "GitHub",
+            linkedin: "LinkedIn",
+            youtube: "YouTube",
+          },
+        },
+      };
+
+      const contactEmail = "paul.alexander.pg@gmail.com";
+      // TODO: replace these URLs with your real profiles/channels.
+      const footerLinks = {
+        github: "",
+        linkedin: "",
+        youtube: "",
+      };
+
+      const langToggle = document.getElementById("langToggle");
+      const menuToggle = document.getElementById("menuToggle");
+      const mainNav = document.getElementById("mainNav");
+      const copyEmailBtn = document.getElementById("copyEmailBtn");
+      const copyFeedback = document.getElementById("copyFeedback");
+      const getStoredLang = () => {
+        try {
+          return localStorage.getItem("lang");
+        } catch (error) {
+          return null;
+        }
+      };
+      const setStoredLang = (lang) => {
+        try {
+          localStorage.setItem("lang", lang);
+        } catch (error) {
+          // ignore storage errors
+        }
+      };
+      let currentLang = getStoredLang() || "es";
+      if (!data[currentLang]) currentLang = "es";
+
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("reveal-in");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      const getNested = (obj, path) =>
+        path.split(".").reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : undefined), obj);
+
+      const t = (key) => getNested(data[currentLang], key) ?? getNested(data.es, key) ?? key;
+
+      const observeReveals = () => {
+        document.querySelectorAll(".reveal:not(.reveal-in)").forEach((node) => revealObserver.observe(node));
+      };
+
+      const renderCards = (id, cards) => {
+        const container = document.getElementById(id);
+        if (!container) return;
+        container.innerHTML = cards
+          .map(
+            (card) =>
+              `<div class="card reveal"><h3>${card.title}</h3><p>${card.copy}</p></div>`
+          )
+          .join("");
+      };
+
+      const renderSectors = (cards) => {
+        const container = document.getElementById("sectorCards");
+        container.innerHTML = cards
+          .map(
+            (card) =>
+              `<div class="sector reveal"><h3>${card.title}</h3><p>${card.copy}</p></div>`
+          )
+          .join("");
+      };
+
+      const renderGallery = (images) => {
+        const container = document.getElementById("galleryGrid");
+        container.innerHTML = images
+          .map(
+            (image) =>
+              `<figure class="reveal"><img src="${image.src}" alt="${image.title}" loading="lazy" decoding="async" width="680" height="420"/><figcaption>${image.title}</figcaption></figure>`
+          )
+          .join("");
+      };
+
+      const renderRoadmap = (items) => {
+        const container = document.getElementById("roadmapItems");
+        container.innerHTML = items
+          .map(
+            (item) =>
+              `<div class="step reveal"><strong>${item.title}</strong><span>${item.copy}</span></div>`
+          )
+          .join("");
+      };
+
+      const applyFooterLinks = () => {
+        const map = [
+          { id: "footerGithub", href: footerLinks.github },
+          { id: "footerLinkedin", href: footerLinks.linkedin },
+          { id: "footerYoutube", href: footerLinks.youtube },
+        ];
+        map.forEach(({ id, href }) => {
+          const link = document.getElementById(id);
+          if (!link) return;
+          if (href) {
+            link.href = href;
+            link.hidden = false;
+            link.setAttribute("target", "_blank");
+            link.setAttribute("rel", "noopener noreferrer");
+          } else {
+            link.hidden = true;
+            link.removeAttribute("href");
+          }
+        });
+      };
+
+      const applyI18n = () => {
+        document.documentElement.lang = currentLang;
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          const value = t(key);
+          if (value) {
+            el.textContent = value;
+          }
+        });
+
+        renderCards("problemCards", t("problem.cards") || []);
+        renderCards("featureCards", t("features.cards") || []);
+        renderCards("architectureCards", t("architecture.cards") || []);
+        renderSectors(t("sectors.cards") || []);
+        renderGallery(t("gallery.images") || []);
+        renderRoadmap(t("roadmap.items") || []);
+
+        langToggle.textContent = currentLang === "es" ? "EN" : "ES";
+        langToggle.setAttribute("aria-pressed", currentLang === "en" ? "true" : "false");
+        langToggle.setAttribute("aria-label", currentLang === "es" ? "Switch language to English" : "Cambiar idioma a español");
+        observeReveals();
+      };
+
+      langToggle.addEventListener("click", () => {
+        currentLang = currentLang === "es" ? "en" : "es";
+        setStoredLang(currentLang);
+        applyI18n();
+      });
+
+      menuToggle.addEventListener("click", () => {
+        const isOpen = mainNav.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+
+      mainNav.addEventListener("click", (event) => {
+        if (event.target.tagName === "A" && mainNav.classList.contains("open")) {
+          mainNav.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      const fallbackCopy = (text) => {
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        temp.style.position = "fixed";
+        temp.style.opacity = "0";
+        document.body.appendChild(temp);
+        temp.focus();
+        temp.select();
+        try {
+          document.execCommand("copy");
+          document.body.removeChild(temp);
+          return true;
+        } catch (error) {
+          document.body.removeChild(temp);
+          return false;
+        }
+      };
+
+      copyEmailBtn.addEventListener("click", async () => {
+        let copied = false;
+        try {
+          await navigator.clipboard.writeText(contactEmail);
+          copied = true;
+        } catch (error) {
+          copied = fallbackCopy(contactEmail);
+        }
+        copyFeedback.textContent = copied ? t("contact.copied") : t("contact.copyFailed");
+      });
+
+      applyFooterLinks();
+      applyI18n();
+    </script>
+  </body>
+</html>
